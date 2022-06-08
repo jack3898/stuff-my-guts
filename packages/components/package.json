@@ -1,12 +1,8 @@
 {
-	"name": "@mealideas/client",
+	"name": "@mealideas/components",
 	"version": "1.0.0",
-	"description": "The main frontend client.",
+	"description": "React components for the app.",
 	"main": "src/index.ts",
-	"scripts": {
-		"dev": "ts-node app.serve.ts",
-		"build": "ts-node app.build.ts"
-	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/jack3898/meal-ideas.git"
@@ -17,18 +13,9 @@
 		"url": "https://github.com/jack3898/meal-ideas/issues"
 	},
 	"homepage": "https://github.com/jack3898/meal-ideas#readme",
-	"dependencies": {
-		"@mealideas/components": "*",
-		"@mealideas/paths": "*",
+	"peerDependencies": {
 		"react": "^18.1.0",
 		"react-dom": "^18.1.0",
 		"react-router-dom": "^6.3.0"
-	},
-	"devDependencies": {
-		"@mealideas/tsconfig": "*",
-		"@mealideas/webpack": "*",
-		"@types/react-dom": "^18.0.5",
-		"jest": "^28.1.1",
-		"ts-node": "^10.8.1"
 	}
 }

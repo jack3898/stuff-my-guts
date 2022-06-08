@@ -14,6 +14,7 @@
 	},
 	"homepage": "https://github.com/jack3898/meal-ideas#readme",
 	"devDependencies": {
+		"@mealideas/paths": "*",
 		"@mealideas/tsconfig": "*",
 		"autoprefixer": "^10.4.7",
 		"css-loader": "^6.7.1",

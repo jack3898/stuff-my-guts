@@ -1,3 +1,4 @@
+import { ROOT } from '@mealideas/paths';
 import dotenv from 'dotenv';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import path from 'path';
@@ -7,7 +8,6 @@ dotenv.config({ path: path.resolve('..', '..', '.env') });
 
 const APP_DIR = path.resolve();
 const CONFIG_DIR = path.resolve(__dirname);
-const ROOT = path.resolve('..', '..');
 
 const webpackConfig: WebpackConfig = {
 	mode: process.env.NODE_ENV as any,
