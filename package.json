@@ -1,0 +1,26 @@
+{
+	"name": "meal-ideas",
+	"version": "1.0.0",
+	"description": "A simple app that intelligently chooses your meals for you from your input.",
+	"main": "index.js",
+	"scripts": {
+		"test": "turbo run jest"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/jack3898/meal-ideas.git"
+	},
+	"author": "Jack Wright",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/jack3898/meal-ideas/issues"
+	},
+	"homepage": "https://github.com/jack3898/meal-ideas#readme",
+	"workspaces": [
+		"packages/*",
+		"apps/*"
+	],
+	"dependencies": {
+		"turbo": "^1.2.16"
+	}
+}
