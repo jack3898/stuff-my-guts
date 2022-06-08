@@ -1,0 +1,6 @@
+{
+	"extends": "@mealideas/tsconfig/tsconfig.base.json",
+	"compilerOptions": {
+		"jsx": "react-jsx"
+	}
+}
