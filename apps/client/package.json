@@ -6,7 +6,7 @@
 	"scripts": {
 		"dev": "ts-node app.serve.ts",
 		"build": "ts-node app.build.ts",
-		"test": "jest"
+		"//test": "jest"
 	},
 	"repository": {
 		"type": "git",

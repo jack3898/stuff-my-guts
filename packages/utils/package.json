@@ -2,6 +2,9 @@
 	"name": "@mealideas/utils",
 	"version": "1.0.0",
 	"description": "Utility functions for Node and browser environments.",
+	"scripts": {
+		"test": "jest"
+	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/jack3898/meal-ideas.git"
@@ -13,6 +16,7 @@
 	},
 	"homepage": "https://github.com/jack3898/meal-ideas#readme",
 	"devDependencies": {
-		"@mealideas/tsconfig": "*"
+		"@mealideas/tsconfig": "*",
+		"jest": "^28.1.1"
 	}
 }
