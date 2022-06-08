@@ -1,0 +1,18 @@
+{
+	"name": "@mealideas/utils",
+	"version": "1.0.0",
+	"description": "Utility functions for Node and browser environments.",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/jack3898/meal-ideas.git"
+	},
+	"author": "Jack Wright",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/jack3898/meal-ideas/issues"
+	},
+	"homepage": "https://github.com/jack3898/meal-ideas#readme",
+	"devDependencies": {
+		"@mealideas/tsconfig": "*"
+	}
+}

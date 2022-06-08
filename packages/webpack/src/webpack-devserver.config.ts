@@ -5,7 +5,8 @@ const devServerConfig: DevServerConfig = {
 	open: true,
 	static: {
 		directory: 'assets'
-	}
+	},
+	hot: true
 };
 
 export default devServerConfig;

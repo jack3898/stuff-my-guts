@@ -5,7 +5,8 @@
 	"main": "src/index.ts",
 	"scripts": {
 		"dev": "ts-node app.serve.ts",
-		"build": "ts-node app.build.ts"
+		"build": "ts-node app.build.ts",
+		"test": "jest"
 	},
 	"repository": {
 		"type": "git",
@@ -20,12 +21,14 @@
 	"dependencies": {
 		"@mealideas/components": "*",
 		"@mealideas/paths": "*",
+		"@mealideas/utils": "*",
 		"react": "^18.1.0",
 		"react-dom": "^18.1.0",
 		"react-router-dom": "^6.3.0"
 	},
 	"devDependencies": {
 		"@mealideas/jest": "*",
+		"@mealideas/tailwind": "*",
 		"@mealideas/tsconfig": "*",
 		"@mealideas/webpack": "*",
 		"@testing-library/dom": "^8.13.0",
