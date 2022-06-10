@@ -1,12 +1,13 @@
 import randomNumber from '@mealideas/utils/src/randomNumber';
 import { useCallback, useEffect, useState } from 'react';
 
+// TODO: This hook is TEMPORARY and will be removed by a GraphQL query in the future!
 export default function useRandomMeal() {
 	const [data, setData] = useState<DummyData | null>(null);
 	const [error, setError] = useState<string | null>(null);
 
 	const retry = useCallback(() => {
-		setData(dummyData[randomNumber(0, dummyData.length - 1)]);
+		setData(dummyData[randomNumber(0, dummyData.length)]);
 	}, []);
 
 	useEffect(() => {

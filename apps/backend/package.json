@@ -2,15 +2,33 @@
 	"name": "@mealideas/backend",
 	"version": "1.0.0",
 	"description": "The backend for the app.",
-	"main": "src/index.ts",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/jack3898/meal-ideas.git"
+	},
+	"scripts": {
+		"dev": "ts-node src/index.ts",
+		"generate": "prisma generate"
 	},
 	"author": "Jack Wright",
 	"license": "ISC",
 	"bugs": {
 		"url": "https://github.com/jack3898/meal-ideas/issues"
 	},
-	"homepage": "https://github.com/jack3898/meal-ideas#readme"
+	"homepage": "https://github.com/jack3898/meal-ideas#readme",
+	"dependencies": {
+		"@graphql-tools/schema": "^8.3.14",
+		"@graphql-tools/stitch": "^8.6.13",
+		"@mealideas/schemas": "*",
+		"@prisma/client": "^3.15.1",
+		"apollo-server": "^3.8.2",
+		"apollo-server-core": "^3.8.2"
+	},
+	"devDependencies": {
+		"@mealideas/tsconfig": "*",
+		"@types/node": "^17.0.41",
+		"prisma": "^3.15.1",
+		"ts-node": "^10.8.1",
+		"typescript": "^4.7.3"
+	}
 }

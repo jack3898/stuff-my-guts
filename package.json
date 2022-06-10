@@ -8,7 +8,8 @@
 		"build": "turbo run build --parallel",
 		"build:nocache": "turbo run build --parallel --no-cache",
 		"test": "turbo run test --parallel",
-		"test:nocache": "turbo run test --parallel --no-cache"
+		"test:nocache": "turbo run test --parallel --no-cache",
+		"generate": "turbo run generate --parallel"
 	},
 	"repository": {
 		"type": "git",
