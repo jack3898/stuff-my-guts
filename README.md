@@ -2,27 +2,17 @@
 
 NOTE: Meal Ideas is currently a work in progress!
 
-Meal Ideas is an app that intelligently plans your dinners for the next 7 days.
+Meal Ideas is an app that intelligently plans your dinners for the next 7 days (or will be when it's done lol). The idea is that you tell it all the dinners you know, and then your worries of deciding what to eat are over. It will take things one step further, as you will not only tell you your plan for the next 7 days, it will be topped with ingredients and contextual decisions like roasts being best for Sundays. The idea is there will be some form of smart algorithm that makes the best decisions possible for you.
 
-## How does it work
+## Setting up the project
 
-It will ask you to put in as many meals as possible, and will ask you questions about each one like:
+As I said, this is a WIP but if you wish to clone the project yourself then go ahead!
 
--   How easy is it to cook on a scale of 1 to 5?
--   How quick is it to cook on a scale of 1 to 5?
--   Who likes/dislikes the meal?
--   When would be the best time to cook this meal? E.g. Sundays/Christmas for roasts, winter for a casserole.
--   Would you like to specify ingredients?
-    -   This will help you prepare the right amount of ingredients for the next 7 days!
+Setup is below:
 
-## Logging in
-
-The app will not have its own login system and instead will rely on OAuth. This vastly increases the security of the users, as passwords will never be stored in our database (only the OAuth token).
-
-OAuth will also have next to no permissions to your provider account, so if it is compromised your account will still be safe and you have the option to reject access to the app and generate a new token.
-
-It's also less for me to get wrong with the login system!
-
-## PWA only
-
-The app will not be on the Play Store or Apple App Store but will instead be available by going to a website. The website will be PWA compliant which means that you can install it as an app via the web browser. This will, to the end user, be indistinguishable from an app from the app store, saves development time, and makes the app in the browser as powerful as the one installed on your phone. No need to pester the user into installing a bloody app! It also makes the app super cross-platform working on Linux phones (which I wish was more popular), Android, iOS, Windows, Mac, etc. with next to no extra development overhead.
+-   Clone this repository with `git clone`
+-   Install Docker with Docker Compose
+-   Run `npm install`
+-   Run `docker-compose up`
+-   Run `npm run seed` to generate and seed a new Postgres database
+-   Run `npm run dev` to build and launch a dev server with the latest client and backend.
