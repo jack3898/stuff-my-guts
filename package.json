@@ -10,7 +10,9 @@
 		"test": "turbo run test --parallel",
 		"test:nocache": "turbo run test --parallel --no-cache",
 		"generate": "turbo run generate --parallel",
-		"seed": "turbo run seed:init && turbo run seed"
+		"seed": "turbo run seed:init && turbo run seed",
+		"introspect": "turbo run introspect",
+		"gqltypegen": "turbo run gqltypegen"
 	},
 	"repository": {
 		"type": "git",

@@ -20,6 +20,12 @@
 		},
 		"seed:init": {
 			"cache": false
+		},
+		"introspect": {
+			"cache": false
+		},
+		"gqltypegen": {
+			"cache": false
 		}
 	}
 }

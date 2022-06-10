@@ -6,6 +6,8 @@
 	"scripts": {
 		"dev": "ts-node app.serve.ts",
 		"build": "ts-node app.build.ts",
+		"introspect": "rover graph introspect http://localhost:3001/graphql >> schema.graphql",
+		"gqltypegen": "npx apollo codegen:generate --localSchemaFile=schema.graphql --excludes=node_modules/* --target=typescript --tagName=gql",
 		"//test": "jest"
 	},
 	"repository": {
@@ -18,7 +20,12 @@
 		"url": "https://github.com/jack3898/meal-ideas/issues"
 	},
 	"homepage": "https://github.com/jack3898/meal-ideas#readme",
+	"overrides": {
+		"graphql": "16.5.0"
+	},
 	"dependencies": {
+		"@apollo/client": "^3.6.7",
+		"@apollo/rover": "^0.7.0",
 		"@mealideas/components": "*",
 		"@mealideas/paths": "*",
 		"@mealideas/utils": "*",
