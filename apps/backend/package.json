@@ -7,8 +7,10 @@
 		"url": "git+https://github.com/jack3898/meal-ideas.git"
 	},
 	"scripts": {
-		"dev": "ts-node src/index.ts",
-		"generate": "prisma generate"
+		"dev": "ts-node src/index.ts && prisma studio",
+		"generate": "prisma generate",
+		"seed": "ts-node prisma/seed.ts",
+		"seed:init": "prisma db push"
 	},
 	"author": "Jack Wright",
 	"license": "ISC",

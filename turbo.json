@@ -14,6 +14,12 @@
 		"generate": {
 			"cache": true,
 			"outputs": ["prisma"]
+		},
+		"seed": {
+			"cache": false
+		},
+		"seed:init": {
+			"cache": false
 		}
 	}
 }
