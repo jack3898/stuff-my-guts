@@ -4,6 +4,7 @@
 		"target": "ES6",
 		"moduleResolution": "node",
 		"sourceMap": true,
-		"strict": true
+		"strict": true,
+		"resolveJsonModule": true
 	}
 }

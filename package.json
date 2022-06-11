@@ -27,8 +27,7 @@
 	"homepage": "https://github.com/jack3898/meal-ideas#readme",
 	"workspaces": [
 		"packages/*",
-		"apps/*",
-		"pre-git/*"
+		"apps/*"
 	],
 	"dependencies": {
 		"turbo": "^1.2.16"

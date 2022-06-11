@@ -1,0 +1,19 @@
+{
+	"name": "@mealideas/depcheck",
+	"version": "1.0.0",
+	"description": "Check configuration and utilities.",
+	"main": "src/index.ts",
+	"devDependencies": {
+		"depcheck": "^1.4.3"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/jack3898/meal-ideas.git"
+	},
+	"author": "Jack Wright",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/jack3898/meal-ideas/issues"
+	},
+	"homepage": "https://github.com/jack3898/meal-ideas#readme"
+}

@@ -10,7 +10,8 @@
 		"dev": "nodemon src/index.ts && prisma studio",
 		"generate": "prisma generate",
 		"seed": "ts-node prisma/seed.ts",
-		"seed:init": "prisma db push --accept-data-loss"
+		"seed:init": "prisma db push --accept-data-loss",
+		"pre-commit": "ts-node pre-commit.ts"
 	},
 	"author": "Jack Wright",
 	"license": "ISC",
@@ -21,14 +22,15 @@
 	"dependencies": {
 		"@graphql-tools/schema": "^8.3.14",
 		"@graphql-tools/stitch": "^8.6.13",
+		"@mealideas/paths": "*",
 		"@mealideas/schemas": "*",
-		"@prisma/client": "^3.15.1",
 		"apollo-server": "^3.8.2",
 		"apollo-server-core": "^3.8.2"
 	},
 	"devDependencies": {
 		"@mealideas/tsconfig": "*",
 		"@types/node": "^17.0.41",
+		"depcheck": "^1.4.3",
 		"nodemon": "^2.0.16",
 		"prisma": "^3.15.1",
 		"ts-node": "^10.8.1",

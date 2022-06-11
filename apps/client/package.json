@@ -7,7 +7,8 @@
 		"dev": "ts-node app.serve.ts",
 		"build": "ts-node app.build.ts",
 		"generate-query-hooks": "graphql-codegen --config codegen.yml",
-		"//test": "jest"
+		"//test": "jest",
+		"pre-commit": "ts-node pre-commit.ts"
 	},
 	"repository": {
 		"type": "git",
@@ -25,7 +26,6 @@
 	"dependencies": {
 		"@apollo/client": "^3.6.7",
 		"@mealideas/components": "*",
-		"@mealideas/paths": "*",
 		"@mealideas/queries": "*",
 		"@mealideas/utils": "*",
 		"graphql": "^16.5.0",
@@ -39,7 +39,9 @@
 		"@graphql-codegen/typescript": "2.5.1",
 		"@graphql-codegen/typescript-operations": "2.4.2",
 		"@graphql-codegen/typescript-react-apollo": "3.2.16",
+		"@mealideas/depcheck": "*",
 		"@mealideas/jest": "*",
+		"@mealideas/paths": "*",
 		"@mealideas/tailwind": "*",
 		"@mealideas/tsconfig": "*",
 		"@mealideas/webpack": "*",
@@ -49,6 +51,7 @@
 		"@testing-library/user-event": "^14.2.0",
 		"@types/jest": "^28.1.1",
 		"@types/react-dom": "^18.0.5",
+		"depcheck": "^1.4.3",
 		"jest": "^28.1.1",
 		"jest-environment-jsdom": "^28.1.1",
 		"ts-jest": "^28.0.4",
