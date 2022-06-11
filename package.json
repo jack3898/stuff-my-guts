@@ -11,7 +11,9 @@
 		"test:nocache": "turbo run test --parallel --no-cache",
 		"generate": "turbo run generate --parallel",
 		"seed": "turbo run seed:init && turbo run seed",
-		"generate-query-hooks": "turbo run generate-query-hooks"
+		"generate-query-hooks": "turbo run generate-query-hooks",
+		"prepare": "husky install",
+		"pre-commit": "turbo run pre-commit --parallel"
 	},
 	"repository": {
 		"type": "git",
@@ -25,12 +27,14 @@
 	"homepage": "https://github.com/jack3898/meal-ideas#readme",
 	"workspaces": [
 		"packages/*",
-		"apps/*"
+		"apps/*",
+		"pre-git/*"
 	],
 	"dependencies": {
 		"turbo": "^1.2.16"
 	},
 	"devDependencies": {
+		"husky": "^8.0.1",
 		"prettier": "^2.6.2"
 	}
 }

@@ -1,0 +1,25 @@
+{
+	"name": "@mealideas/depcheck",
+	"version": "1.0.0",
+	"description": "Check dependencies invoked by a Git hook.",
+	"main": "src/index.ts",
+	"scripts": {
+		"pre-commit": "ts-node src/index.ts"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/jack3898/meal-ideas.git"
+	},
+	"author": "Jack Wright",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/jack3898/meal-ideas/issues"
+	},
+	"homepage": "https://github.com/jack3898/meal-ideas#readme",
+	"devDependencies": {
+		"@mealideas/paths": "*",
+		"@mealideas/tsconfig": "^1.0.0",
+		"depcheck": "^1.4.3",
+		"ts-node": "^10.8.1"
+	}
+}

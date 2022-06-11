@@ -23,6 +23,9 @@
 		},
 		"generate-query-hooks": {
 			"cache": false
+		},
+		"pre-commit": {
+			"cache": false
 		}
 	}
 }
