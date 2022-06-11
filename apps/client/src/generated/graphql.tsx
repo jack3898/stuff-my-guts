@@ -15,29 +15,172 @@ export type Scalars = {
 	Float: number;
 };
 
+export type Meal = {
+	__typename?: 'Meal';
+	about: Scalars['String'];
+	id: Scalars['ID'];
+	name: Scalars['String'];
+	userId: Scalars['Int'];
+};
+
 export type Query = {
 	__typename?: 'Query';
+	meal?: Maybe<Meal>;
+	meals?: Maybe<Array<Maybe<Meal>>>;
+	user: User;
 	users: Array<User>;
 };
 
 export type User = {
 	__typename?: 'User';
+	bio?: Maybe<Scalars['String']>;
+	country?: Maybe<Scalars['String']>;
 	email: Scalars['String'];
-	name?: Maybe<Scalars['String']>;
+	firstname: Scalars['String'];
+	id: Scalars['ID'];
+	lastname: Scalars['String'];
+	tel?: Maybe<Scalars['String']>;
+};
+
+export type MealsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type MealsQuery = {
+	__typename?: 'Query';
+	meals?: Array<{
+		__typename?: 'Meal';
+		id: string;
+		name: string;
+		about: string;
+		userId: number;
+	} | null> | null;
+};
+
+export type MealQueryVariables = Exact<{ [key: string]: never }>;
+
+export type MealQuery = {
+	__typename?: 'Query';
+	meal?: { __typename?: 'Meal'; id: string; name: string; about: string; userId: number } | null;
 };
 
 export type UsersQueryVariables = Exact<{ [key: string]: never }>;
 
 export type UsersQuery = {
 	__typename?: 'Query';
-	users: Array<{ __typename?: 'User'; email: string; name?: string | null }>;
+	users: Array<{
+		__typename?: 'User';
+		id: string;
+		firstname: string;
+		lastname: string;
+		bio?: string | null;
+		country?: string | null;
+		tel?: string | null;
+	}>;
 };
 
+export type UserQueryVariables = Exact<{ [key: string]: never }>;
+
+export type UserQuery = {
+	__typename?: 'Query';
+	user: {
+		__typename?: 'User';
+		id: string;
+		firstname: string;
+		lastname: string;
+		bio?: string | null;
+		country?: string | null;
+		tel?: string | null;
+	};
+};
+
+export const MealsDocument = gql`
+	query Meals {
+		meals {
+			id
+			name
+			about
+			userId
+		}
+	}
+`;
+
+/**
+ * __useMealsQuery__
+ *
+ * To run a query within a React component, call `useMealsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMealsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMealsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useMealsQuery(
+	baseOptions?: Apollo.QueryHookOptions<MealsQuery, MealsQueryVariables>
+) {
+	const options = { ...defaultOptions, ...baseOptions };
+	return Apollo.useQuery<MealsQuery, MealsQueryVariables>(MealsDocument, options);
+}
+export function useMealsLazyQuery(
+	baseOptions?: Apollo.LazyQueryHookOptions<MealsQuery, MealsQueryVariables>
+) {
+	const options = { ...defaultOptions, ...baseOptions };
+	return Apollo.useLazyQuery<MealsQuery, MealsQueryVariables>(MealsDocument, options);
+}
+export type MealsQueryHookResult = ReturnType<typeof useMealsQuery>;
+export type MealsLazyQueryHookResult = ReturnType<typeof useMealsLazyQuery>;
+export type MealsQueryResult = Apollo.QueryResult<MealsQuery, MealsQueryVariables>;
+export const MealDocument = gql`
+	query Meal {
+		meal {
+			id
+			name
+			about
+			userId
+		}
+	}
+`;
+
+/**
+ * __useMealQuery__
+ *
+ * To run a query within a React component, call `useMealQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMealQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMealQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useMealQuery(baseOptions?: Apollo.QueryHookOptions<MealQuery, MealQueryVariables>) {
+	const options = { ...defaultOptions, ...baseOptions };
+	return Apollo.useQuery<MealQuery, MealQueryVariables>(MealDocument, options);
+}
+export function useMealLazyQuery(
+	baseOptions?: Apollo.LazyQueryHookOptions<MealQuery, MealQueryVariables>
+) {
+	const options = { ...defaultOptions, ...baseOptions };
+	return Apollo.useLazyQuery<MealQuery, MealQueryVariables>(MealDocument, options);
+}
+export type MealQueryHookResult = ReturnType<typeof useMealQuery>;
+export type MealLazyQueryHookResult = ReturnType<typeof useMealLazyQuery>;
+export type MealQueryResult = Apollo.QueryResult<MealQuery, MealQueryVariables>;
 export const UsersDocument = gql`
 	query Users {
 		users {
-			email
-			name
+			id
+			firstname
+			lastname
+			bio
+			country
+			tel
 		}
 	}
 `;
@@ -72,3 +215,44 @@ export function useUsersLazyQuery(
 export type UsersQueryHookResult = ReturnType<typeof useUsersQuery>;
 export type UsersLazyQueryHookResult = ReturnType<typeof useUsersLazyQuery>;
 export type UsersQueryResult = Apollo.QueryResult<UsersQuery, UsersQueryVariables>;
+export const UserDocument = gql`
+	query User {
+		user {
+			id
+			firstname
+			lastname
+			bio
+			country
+			tel
+		}
+	}
+`;
+
+/**
+ * __useUserQuery__
+ *
+ * To run a query within a React component, call `useUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useUserQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useUserQuery(baseOptions?: Apollo.QueryHookOptions<UserQuery, UserQueryVariables>) {
+	const options = { ...defaultOptions, ...baseOptions };
+	return Apollo.useQuery<UserQuery, UserQueryVariables>(UserDocument, options);
+}
+export function useUserLazyQuery(
+	baseOptions?: Apollo.LazyQueryHookOptions<UserQuery, UserQueryVariables>
+) {
+	const options = { ...defaultOptions, ...baseOptions };
+	return Apollo.useLazyQuery<UserQuery, UserQueryVariables>(UserDocument, options);
+}
+export type UserQueryHookResult = ReturnType<typeof useUserQuery>;
+export type UserLazyQueryHookResult = ReturnType<typeof useUserLazyQuery>;
+export type UserQueryResult = Apollo.QueryResult<UserQuery, UserQueryVariables>;

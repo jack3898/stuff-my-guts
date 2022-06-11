@@ -1,0 +1,21 @@
+query Users {
+	users {
+		id
+		firstname
+		lastname
+		bio
+		country
+		tel
+	}
+}
+
+query User {
+	user {
+		id
+		firstname
+		lastname
+		bio
+		country
+		tel
+	}
+}

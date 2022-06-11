@@ -3,12 +3,13 @@ import Heading from '@mealideas/components/src/core-page/Heading';
 import Main from '@mealideas/components/src/core-page/Main';
 import Rows from '@mealideas/components/src/core-page/Rows';
 import TodaysMeal from '@mealideas/components/src/meal/TodaysMeal';
-import { useUsersQuery } from '../../generated/graphql';
+import { useMealQuery, useUsersQuery } from '../../generated/graphql';
 import useRandomMeal from '../../hooks/useRandomMeal';
 
 export default function Home() {
 	const meals = useRandomMeal();
 	const users = useUsersQuery();
+	const meal = useMealQuery();
 
 	return (
 		<>
@@ -36,7 +37,8 @@ export default function Home() {
 
 					<div>
 						<Heading level="2" text="Some random users lol" />
-						<p>{users.data?.users[0].name}</p>
+						<p>{users.data?.users[0].firstname}</p>
+						<p>{meal.data?.meal?.name}</p>
 					</div>
 				</Rows>
 			</Main>

@@ -1,9 +1,11 @@
-import { usersResolvers } from './resolvers/users.resolvers';
+import prismaClient from './prismaClient';
+import importedResolvers from './resolvers';
 import seedData from './seed';
-import { usersTypeDefs } from './typedefs/users.typedefs';
+import importedTypeDefs from './typedefs';
 
-export const resolvers = [usersResolvers];
-export const typeDefs = [usersTypeDefs];
+export const resolvers = importedResolvers;
+export const typeDefs = importedTypeDefs;
 export const seedable = seedData;
+export const prismaSeederClient = prismaClient;
 
 export default [...typeDefs, ...resolvers];
