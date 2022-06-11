@@ -13,6 +13,20 @@ Setup is below:
 -   Clone this repository with `git clone`
 -   Install Docker with Docker Compose
 -   Run `npm install`
--   Run `docker-compose up`
--   Run `npm run seed` to generate and seed a new Postgres database
--   Run `npm run dev` to build and launch a dev server with the latest client and backend.
+-   Run `docker-compose up` to launch a containerised database
+    -   Ensure your .env file is set in both the root of the monorepo and in apps/backend! .env.example files have been made to help you.
+-   Run `npm run seed` to generate the database, tables and populate it with sample data
+-   Run `npm run dev` to build and launch the client and backend gateway
+-   Done!
+
+## Technologies
+
+The frontend application is written in TypeScript React, utilising a GraphQL API bundled with a custom Webpack configuration.
+
+The backend is also written in TypeScript with Prisma to make database management far easier. Support for code and type generation has been implemented to make the code as type safe as possible.
+
+The database technology of choice is PostgreSQL, but as this project uses Prisma, support for MongoDB, MySQL and other database technologies is possible (just a tweak of some settings).
+
+Jest is the unit testing framework of choice. Pre-commit hooks and eslint support is on its way.
+
+This project also uses the monorepo approach, all packages and dependencies are defined in this repository.
