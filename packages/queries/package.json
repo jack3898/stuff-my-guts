@@ -1,0 +1,16 @@
+{
+	"name": "@mealideas/queries",
+	"version": "1.0.0",
+	"description": "A collection of client queries.",
+	"main": "generated/graphql.tsx",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/jack3898/meal-ideas.git"
+	},
+	"author": "Jack Wright",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/jack3898/meal-ideas/issues"
+	},
+	"homepage": "https://github.com/jack3898/meal-ideas#readme"
+}

@@ -11,8 +11,7 @@
 		"test:nocache": "turbo run test --parallel --no-cache",
 		"generate": "turbo run generate --parallel",
 		"seed": "turbo run seed:init && turbo run seed",
-		"introspect": "turbo run introspect",
-		"gqltypegen": "turbo run gqltypegen"
+		"generate-query-hooks": "turbo run generate-query-hooks"
 	},
 	"repository": {
 		"type": "git",
@@ -30,5 +29,8 @@
 	],
 	"dependencies": {
 		"turbo": "^1.2.16"
+	},
+	"devDependencies": {
+		"prettier": "^2.6.2"
 	}
 }

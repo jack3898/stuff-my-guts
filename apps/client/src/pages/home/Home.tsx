@@ -1,22 +1,14 @@
-import { gql, useQuery } from '@apollo/client';
 import Header from '@mealideas/components/src/core-page/Header';
 import Heading from '@mealideas/components/src/core-page/Heading';
 import Main from '@mealideas/components/src/core-page/Main';
 import Rows from '@mealideas/components/src/core-page/Rows';
 import TodaysMeal from '@mealideas/components/src/meal/TodaysMeal';
+import { useUsersQuery } from '../../generated/graphql';
 import useRandomMeal from '../../hooks/useRandomMeal';
-import { Users } from './__generated__/Users';
 
 export default function Home() {
 	const meals = useRandomMeal();
-	const users = useQuery<Users>(gql`
-		query Users {
-			users {
-				email
-				name
-			}
-		}
-	`);
+	const users = useUsersQuery();
 
 	return (
 		<>
@@ -44,7 +36,7 @@ export default function Home() {
 
 					<div>
 						<Heading level="2" text="Some random users lol" />
-						<p>{JSON.stringify(users.data)}</p>
+						<p>{users.data?.users[0].name}</p>
 					</div>
 				</Rows>
 			</Main>
