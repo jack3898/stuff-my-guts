@@ -1,5 +1,3 @@
-import Heading from '../core-page/Heading';
-
 type TodaysMealProps = {
 	name: string;
 };
@@ -7,7 +5,7 @@ type TodaysMealProps = {
 export default function TodaysMeal(props: TodaysMealProps) {
 	return (
 		<section>
-			<Heading level="1" text={`Today's Meal: ${props.name}!`} />
+			<h1>Today's Meal: {props.name}!</h1>
 			<p>We picked {props.name} :D</p>
 		</section>
 	);

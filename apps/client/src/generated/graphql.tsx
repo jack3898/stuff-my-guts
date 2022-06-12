@@ -23,6 +23,16 @@ export type Meal = {
 	userId: Scalars['Int'];
 };
 
+export type Mutation = {
+	__typename?: 'Mutation';
+	authenticate?: Maybe<Scalars['String']>;
+};
+
+export type MutationAuthenticateArgs = {
+	email: Scalars['String'];
+	password: Scalars['String'];
+};
+
 export type Query = {
 	__typename?: 'Query';
 	meal?: Maybe<Meal>;
@@ -91,6 +101,13 @@ export type UserQuery = {
 		tel?: string | null;
 	};
 };
+
+export type AuthenticateMutationVariables = Exact<{
+	email: Scalars['String'];
+	password: Scalars['String'];
+}>;
+
+export type AuthenticateMutation = { __typename?: 'Mutation'; authenticate?: string | null };
 
 export const MealsDocument = gql`
 	query Meals {
@@ -256,3 +273,46 @@ export function useUserLazyQuery(
 export type UserQueryHookResult = ReturnType<typeof useUserQuery>;
 export type UserLazyQueryHookResult = ReturnType<typeof useUserLazyQuery>;
 export type UserQueryResult = Apollo.QueryResult<UserQuery, UserQueryVariables>;
+export const AuthenticateDocument = gql`
+	mutation Authenticate($email: String!, $password: String!) {
+		authenticate(email: $email, password: $password)
+	}
+`;
+export type AuthenticateMutationFn = Apollo.MutationFunction<
+	AuthenticateMutation,
+	AuthenticateMutationVariables
+>;
+
+/**
+ * __useAuthenticateMutation__
+ *
+ * To run a mutation, you first call `useAuthenticateMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAuthenticateMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [authenticateMutation, { data, loading, error }] = useAuthenticateMutation({
+ *   variables: {
+ *      email: // value for 'email'
+ *      password: // value for 'password'
+ *   },
+ * });
+ */
+export function useAuthenticateMutation(
+	baseOptions?: Apollo.MutationHookOptions<AuthenticateMutation, AuthenticateMutationVariables>
+) {
+	const options = { ...defaultOptions, ...baseOptions };
+	return Apollo.useMutation<AuthenticateMutation, AuthenticateMutationVariables>(
+		AuthenticateDocument,
+		options
+	);
+}
+export type AuthenticateMutationHookResult = ReturnType<typeof useAuthenticateMutation>;
+export type AuthenticateMutationResult = Apollo.MutationResult<AuthenticateMutation>;
+export type AuthenticateMutationOptions = Apollo.BaseMutationOptions<
+	AuthenticateMutation,
+	AuthenticateMutationVariables
+>;

@@ -15,4 +15,8 @@ export const userTypeDefs = gql`
 		users: [User!]!
 		user: User!
 	}
+
+	type Mutation {
+		authenticate(email: String!, password: String!): String
+	}
 `;

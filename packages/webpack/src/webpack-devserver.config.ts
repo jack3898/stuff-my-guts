@@ -1,12 +1,12 @@
 import { Configuration as DevServerConfig } from 'webpack-dev-server';
 
 const devServerConfig: DevServerConfig = {
-	port: 9000,
-	open: true,
+	port: 3000,
 	static: {
 		directory: 'assets'
 	},
-	hot: true
+	hot: true,
+	historyApiFallback: true
 };
 
 export default devServerConfig;

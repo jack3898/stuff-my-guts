@@ -19,3 +19,7 @@ query User {
 		tel
 	}
 }
+
+mutation Authenticate($email: String!, $password: String!) {
+	authenticate(email: $email, password: $password)
+}
