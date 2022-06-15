@@ -23,7 +23,7 @@
 		"@graphql-tools/schema": "^8.3.14",
 		"@graphql-tools/stitch": "^8.6.13",
 		"@mealideas/paths": "*",
-		"@mealideas/schemas": "*",
+		"@mealideas/database": "*",
 		"apollo-server": "^3.8.2",
 		"apollo-server-core": "^3.8.2"
 	},

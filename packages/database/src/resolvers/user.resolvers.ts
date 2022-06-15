@@ -26,7 +26,14 @@ export const userResolvers = {
 			const user = await prisma.user.findFirst({ where: { email, password } });
 
 			if (user) {
-				return jwt.sign({ data: email }, process.env.JWT_SECRET!);
+				return jwt.sign(
+					{
+						firstname: user.firstname,
+						lastname: user.lastname
+					},
+					process.env.JWT_SECRET!,
+					{}
+				);
 			}
 
 			throw new AuthenticationError('Invalid email and/or password!');

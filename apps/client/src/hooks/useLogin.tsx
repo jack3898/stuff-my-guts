@@ -1,5 +1,5 @@
 import { FormEvent, useCallback } from 'react';
-import { useAuthenticateMutation } from '../../../generated/graphql';
+import { useAuthenticateMutation } from '../generated/graphql';
 
 // TODO: Replace with Formik!
 export default function useLogin() {
