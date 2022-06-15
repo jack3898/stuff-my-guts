@@ -20,7 +20,7 @@ export type Meal = {
 	about: Scalars['String'];
 	id: Scalars['ID'];
 	name: Scalars['String'];
-	userId: Scalars['Int'];
+	ownerId: Scalars['Int'];
 };
 
 export type Mutation = {
@@ -49,27 +49,23 @@ export type User = {
 	firstname: Scalars['String'];
 	id: Scalars['ID'];
 	lastname: Scalars['String'];
+	mealIds?: Maybe<Array<Maybe<Scalars['Int']>>>;
 	tel?: Maybe<Scalars['String']>;
+	username: Scalars['String'];
 };
 
 export type MealsQueryVariables = Exact<{ [key: string]: never }>;
 
 export type MealsQuery = {
 	__typename?: 'Query';
-	meals?: Array<{
-		__typename?: 'Meal';
-		id: string;
-		name: string;
-		about: string;
-		userId: number;
-	} | null> | null;
+	meals?: Array<{ __typename?: 'Meal'; id: string; name: string; about: string } | null> | null;
 };
 
 export type MealQueryVariables = Exact<{ [key: string]: never }>;
 
 export type MealQuery = {
 	__typename?: 'Query';
-	meal?: { __typename?: 'Meal'; id: string; name: string; about: string; userId: number } | null;
+	meal?: { __typename?: 'Meal'; id: string; name: string; about: string } | null;
 };
 
 export type UsersQueryVariables = Exact<{ [key: string]: never }>;
@@ -115,7 +111,6 @@ export const MealsDocument = gql`
 			id
 			name
 			about
-			userId
 		}
 	}
 `;
@@ -156,7 +151,6 @@ export const MealDocument = gql`
 			id
 			name
 			about
-			userId
 		}
 	}
 `;

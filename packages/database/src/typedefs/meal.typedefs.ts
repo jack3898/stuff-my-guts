@@ -5,7 +5,7 @@ export const mealTypeDefs = gql`
 		id: ID!
 		name: String!
 		about: String!
-		userId: Int!
+		ownerId: Int!
 	}
 
 	type Query {

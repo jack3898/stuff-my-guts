@@ -1,6 +1,6 @@
 import prismaClient from './prismaClient';
 import importedResolvers from './resolvers';
-import seedData from './seed';
+import seedData from './seed-data';
 import importedTypeDefs from './typedefs';
 
 export const resolvers = importedResolvers;

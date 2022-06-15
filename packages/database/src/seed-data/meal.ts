@@ -1,11 +1,12 @@
+import { Prisma } from '@prisma/client';
 import prismaClient from '../prismaClient';
 
-const meals = [
+const meals: Prisma.MealCreateArgs['data'][] = [
 	{
 		id: 1,
 		name: 'Chicken Burgers',
 		about: 'Come try em!',
-		userId: 1
+		ownerId: 1
 	}
 ];
 

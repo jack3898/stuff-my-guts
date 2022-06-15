@@ -23,8 +23,9 @@ export default function Login() {
 
 					<p>
 						Login credentials can be found in{' '}
-						<code>packages/schemas/src/seed/user.ts</code> (oauth key is the password).
-						Ensure the database is seeded with <code>npm run seed</code> first!
+						<code>packages/database/src/seed-data/user.ts</code> (oauth key is the
+						password). Ensure the database is seeded with <code>npm run seed</code>{' '}
+						first!
 					</p>
 				</div>
 				<form onSubmit={handleSubmit}>

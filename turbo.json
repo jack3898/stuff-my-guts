@@ -12,8 +12,7 @@
 			"outputs": ["src"]
 		},
 		"generate": {
-			"cache": true,
-			"outputs": ["prisma"]
+			"cache": false
 		},
 		"seed": {
 			"cache": false

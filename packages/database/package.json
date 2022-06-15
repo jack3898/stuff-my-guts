@@ -1,7 +1,7 @@
 {
-	"name": "@mealideas/schemas",
+	"name": "@mealideas/database",
 	"version": "1.0.0",
-	"description": "Resolvers and schemas.",
+	"description": "Queries, schemas, resolvers and more.",
 	"main": "src/index.ts",
 	"repository": {
 		"type": "git",
@@ -20,8 +20,10 @@
 		"graphql": "^16.5.0"
 	},
 	"dependencies": {
+		"@mealideas/paths": "*",
 		"@prisma/client": "^3.15.1",
 		"apollo-server": "^3.8.2",
+		"dotenv": "^16.0.1",
 		"jsonwebtoken": "^8.5.1"
 	}
 }

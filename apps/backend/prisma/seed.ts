@@ -1,4 +1,4 @@
-import { prismaSeederClient, seedable } from '@mealideas/schemas';
+import { prismaSeederClient, seedable } from '@mealideas/database';
 
 Promise.all(
 	seedable.map(async (seed) => {
@@ -28,7 +28,7 @@ Promise.all(
 		process.exit(0);
 	})
 	.catch((error) => {
-		const message = ['Database seeding failed!', '⬇️⬇️⬇️', error, '⬆️⬆️⬆️'];
+		const message = ['❌ Database seeding failed!', '⬇️ ⬇️ ⬇️', error, '⬆️ ⬆️ ⬆️'];
 
 		console.error(message.join('\n\n'));
 		prismaSeederClient.$disconnect();

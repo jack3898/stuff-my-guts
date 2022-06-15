@@ -1,6 +1,6 @@
 overwrite: true
 schema: 'http://localhost:3001/graphql'
-documents: ../../packages/queries/src/**/*.graphql
+documents: ../../packages/database/src/queries/**/*.graphql
 # TODO: maybe see if https://www.graphql-code-generator.com/docs/config-reference/documents-field#custom-document-loader works to remove the '../../'
 # We can then reliably use the symlink in node_modules then. Helps for any potential future refactors.
 generates:

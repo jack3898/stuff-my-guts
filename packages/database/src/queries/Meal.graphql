@@ -3,7 +3,6 @@ query Meals {
 		id
 		name
 		about
-		userId
 	}
 }
 
@@ -12,6 +11,5 @@ query Meal {
 		id
 		name
 		about
-		userId
 	}
 }

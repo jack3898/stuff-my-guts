@@ -5,10 +5,12 @@ export const userTypeDefs = gql`
 		id: ID!
 		firstname: String!
 		lastname: String!
+		username: String!
 		email: String!
 		tel: String
 		country: String
 		bio: String
+		mealIds: [Int]
 	}
 
 	type Query {
