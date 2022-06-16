@@ -3,6 +3,9 @@
 	"version": "1.0.0",
 	"description": "Queries, schemas, resolvers and more.",
 	"main": "src/index.ts",
+	"scripts": {
+		"pre-commit": "ts-node pre-commit.ts"
+	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/jack3898/meal-ideas.git"
@@ -14,7 +17,10 @@
 	},
 	"homepage": "https://github.com/jack3898/meal-ideas#readme",
 	"devDependencies": {
-		"@mealideas/tsconfig": "*"
+		"@mealideas/depcheck": "^1.0.0",
+		"@mealideas/tsconfig": "*",
+		"depcheck": "^1.4.3",
+		"ts-node": "^10.8.1"
 	},
 	"peerDependencies": {
 		"graphql": "^16.5.0"
