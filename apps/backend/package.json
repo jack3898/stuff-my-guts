@@ -10,7 +10,7 @@
 		"dev": "nodemon src/index.ts && prisma studio",
 		"generate": "prisma generate",
 		"seed": "ts-node prisma/seed.ts",
-		"seed:init": "prisma db push --accept-data-loss",
+		"seed:init": "prisma db push --accept-data-loss --force-reset",
 		"pre-commit": "ts-node pre-commit.ts"
 	},
 	"author": "Jack Wright",
