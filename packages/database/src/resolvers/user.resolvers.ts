@@ -1,5 +1,6 @@
 import { ROOT } from '@mealideas/paths';
 import { AuthenticationError } from 'apollo-server';
+import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import path from 'path';
@@ -23,9 +24,10 @@ export const userResolvers = {
 			root: unknown,
 			{ email, password }: { email: string; password: string }
 		) => {
-			const user = await prisma.user.findFirst({ where: { email, password } });
+			const user = await prisma.user.findFirst({ where: { email } });
+			const validPassword = await bcrypt.compare(password, String(user?.password));
 
-			if (user) {
+			if (user && validPassword) {
 				return jwt.sign(
 					{
 						firstname: user.firstname,
@@ -53,14 +55,19 @@ export const userResolvers = {
 				lastname: string;
 				password: string;
 			}
-		) =>
-			new Promise((resolve, reject) => {
-				prisma.user
-					.create({
-						data: { email, firstname, lastname, password, username } // TODO: use bCrypt
-					})
-					.then((user) => resolve(!!user))
-					.catch(reject);
-			})
+		) => {
+			try {
+				const salt = await bcrypt.genSalt(11);
+				const hashedPassword = await bcrypt.hash(password, salt);
+
+				const user = await prisma.user.create({
+					data: { email, firstname, lastname, password: hashedPassword, username }
+				});
+
+				return !!user;
+			} catch (error: any) {
+				throw Error(error);
+			}
+		}
 	}
 };

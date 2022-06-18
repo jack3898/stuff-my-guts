@@ -3,7 +3,6 @@ import prismaClient from '../prismaClient';
 
 const meals: Prisma.MealCreateArgs['data'][] = [
 	{
-		id: 1,
 		name: 'Chicken Burgers',
 		about: 'Come try em!',
 		ownerId: 1
