@@ -27,5 +27,11 @@ export const userTypeDefs = gql`
 			lastname: String!
 			password: String!
 		): Boolean
+		updateAccount(
+			newEmail: String
+			newPassword: String
+			currentPassword: String!
+			token: String!
+		): Boolean
 	}
 `;

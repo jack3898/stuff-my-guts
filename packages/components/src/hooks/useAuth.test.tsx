@@ -33,8 +33,14 @@ describe('useAuthenticated context', () => {
 			expect.objectContaining({
 				token: null,
 				tokenData: {
+					bio: null,
+					country: null,
+					email: null,
 					firstname: null,
-					lastname: null
+					id: null,
+					lastname: null,
+					tel: null,
+					username: null
 				}
 			})
 		);
@@ -52,8 +58,14 @@ describe('useAuthenticated context', () => {
 				expect.objectContaining({
 					token: TEST_COOKIE_TOKEN,
 					tokenData: {
+						bio: null,
+						country: null,
+						email: null,
 						firstname: 'Jack',
-						lastname: 'Wright'
+						id: null,
+						lastname: 'Wright',
+						tel: null,
+						username: null
 					}
 				})
 			);
@@ -101,8 +113,14 @@ describe('useAuthenticated context', () => {
 				expect.objectContaining({
 					token: null,
 					tokenData: {
+						bio: null,
+						country: null,
+						email: null,
 						firstname: null,
-						lastname: null
+						id: null,
+						lastname: null,
+						tel: null,
+						username: null
 					}
 				})
 			);

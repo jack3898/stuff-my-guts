@@ -27,6 +27,7 @@ export type Mutation = {
 	__typename?: 'Mutation';
 	authenticate?: Maybe<Scalars['String']>;
 	create?: Maybe<Scalars['Boolean']>;
+	updateAccount?: Maybe<Scalars['Boolean']>;
 };
 
 export type MutationAuthenticateArgs = {
@@ -40,6 +41,13 @@ export type MutationCreateArgs = {
 	lastname: Scalars['String'];
 	password: Scalars['String'];
 	username: Scalars['String'];
+};
+
+export type MutationUpdateAccountArgs = {
+	currentPassword: Scalars['String'];
+	newEmail?: InputMaybe<Scalars['String']>;
+	newPassword?: InputMaybe<Scalars['String']>;
+	token: Scalars['String'];
 };
 
 export type Query = {
@@ -123,6 +131,15 @@ export type CreateUserMutationVariables = Exact<{
 }>;
 
 export type CreateUserMutation = { __typename?: 'Mutation'; create?: boolean | null };
+
+export type EditUserMutationVariables = Exact<{
+	currentPassword: Scalars['String'];
+	token: Scalars['String'];
+	newEmail?: InputMaybe<Scalars['String']>;
+	newPassword?: InputMaybe<Scalars['String']>;
+}>;
+
+export type EditUserMutation = { __typename?: 'Mutation'; updateAccount?: boolean | null };
 
 export const MealsDocument = gql`
 	query Meals {
@@ -386,4 +403,59 @@ export type CreateUserMutationResult = Apollo.MutationResult<CreateUserMutation>
 export type CreateUserMutationOptions = Apollo.BaseMutationOptions<
 	CreateUserMutation,
 	CreateUserMutationVariables
+>;
+export const EditUserDocument = gql`
+	mutation EditUser(
+		$currentPassword: String!
+		$token: String!
+		$newEmail: String
+		$newPassword: String
+	) {
+		updateAccount(
+			currentPassword: $currentPassword
+			token: $token
+			newEmail: $newEmail
+			newPassword: $newPassword
+		)
+	}
+`;
+export type EditUserMutationFn = Apollo.MutationFunction<
+	EditUserMutation,
+	EditUserMutationVariables
+>;
+
+/**
+ * __useEditUserMutation__
+ *
+ * To run a mutation, you first call `useEditUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useEditUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [editUserMutation, { data, loading, error }] = useEditUserMutation({
+ *   variables: {
+ *      currentPassword: // value for 'currentPassword'
+ *      token: // value for 'token'
+ *      newEmail: // value for 'newEmail'
+ *      newPassword: // value for 'newPassword'
+ *   },
+ * });
+ */
+export function useEditUserMutation(
+	baseOptions?: Apollo.MutationHookOptions<EditUserMutation, EditUserMutationVariables>
+) {
+	const options = { ...defaultOptions, ...baseOptions };
+	return Apollo.useMutation<EditUserMutation, EditUserMutationVariables>(
+		EditUserDocument,
+		options
+	);
+}
+export type EditUserMutationHookResult = ReturnType<typeof useEditUserMutation>;
+export type EditUserMutationResult = Apollo.MutationResult<EditUserMutation>;
+export type EditUserMutationOptions = Apollo.BaseMutationOptions<
+	EditUserMutation,
+	EditUserMutationVariables
 >;

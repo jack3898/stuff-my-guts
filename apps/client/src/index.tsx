@@ -9,6 +9,7 @@ import './index.css';
 const Home = lazy(() => import('./pages/home/Home'));
 const Login = lazy(() => import('./pages/login/Login'));
 const Signup = lazy(() => import('./pages/signup/Signup'));
+const Account = lazy(() => import('./pages/account/Account'));
 
 const client = new ApolloClient({
 	uri: 'http://localhost:3001/graphql',
@@ -27,10 +28,7 @@ function App() {
 							<Route path="/" element={<Home />} />
 							<Route path="login" element={<Login />} />
 							<Route path="signup" element={<Signup />} />
-							<Route
-								path="account"
-								element={<p className="text-center">Coming soon!</p>}
-							/>
+							<Route path="account" element={<Account />} />
 							<Route
 								path="planner"
 								element={<p className="text-center">Coming soon!</p>}

@@ -28,10 +28,18 @@ export const userResolvers = {
 			const validPassword = await bcrypt.compare(password, String(user?.password));
 
 			if (user && validPassword) {
+				const { id, username, firstname, lastname, email, bio, country, tel } = user;
+
 				return jwt.sign(
 					{
-						firstname: user.firstname,
-						lastname: user.lastname
+						id,
+						username,
+						firstname,
+						lastname,
+						email,
+						bio,
+						country,
+						tel
 					},
 					process.env.JWT_SECRET!,
 					{}
@@ -68,6 +76,55 @@ export const userResolvers = {
 			} catch (error: any) {
 				throw Error(error);
 			}
+		},
+		updateAccount: async (
+			root: unknown,
+			{
+				newEmail,
+				newPassword,
+				currentPassword,
+				token
+			}: {
+				newEmail?: string;
+				newPassword?: string;
+				currentPassword: string;
+				token: string;
+			}
+		) => {
+			const validJwt = jwt.verify(token, process.env.JWT_SECRET!) as {
+				id: number;
+				password: string;
+			};
+
+			const user = await prisma.user.findFirst({
+				select: { password: true, email: true },
+				where: { id: validJwt.id }
+			});
+
+			const validPassword = await bcrypt.compare(currentPassword, String(user?.password));
+
+			if (!validPassword || !user) {
+				throw new AuthenticationError('Invalid password!');
+			}
+
+			if ((newPassword !== user.password || newEmail !== user.email) && validJwt.id) {
+				const salt = await bcrypt.genSalt(11);
+				const newHashedPassword = newPassword
+					? await bcrypt.hash(newPassword, salt)
+					: user.password;
+
+				await prisma.user.update({
+					where: {
+						id: validJwt.id
+					},
+					data: {
+						password: newHashedPassword,
+						email: newEmail
+					}
+				});
+			}
+
+			return true;
 		}
 	}
 };

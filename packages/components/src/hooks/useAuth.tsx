@@ -5,8 +5,14 @@ import { useNavigate } from 'react-router-dom';
 
 export type AuthData = {
 	tokenData: {
+		id: number | null;
+		username: string | null;
 		firstname: string | null;
 		lastname: string | null;
+		email: string | null;
+		bio: string | null;
+		country: string | null;
+		tel: string | null;
 	};
 	token: string | null;
 	loginRoute: string;
@@ -24,8 +30,14 @@ export type AuthContextProviderProps = {
 const AuthContext = createContext({
 	token: null,
 	tokenData: {
+		id: null,
+		username: null,
+		email: null,
 		firstname: null,
-		lastname: null
+		lastname: null,
+		tel: null,
+		bio: null,
+		country: null
 	},
 	loginRoute: '/',
 	login: () => {},
@@ -55,8 +67,14 @@ export function AuthContextProvider({ children, directTo }: AuthContextProviderP
 	const providerValue: AuthData = {
 		token: authToken,
 		tokenData: {
+			id: jwtData?.id || null,
+			username: jwtData?.username || null,
+			email: jwtData?.email || null,
 			firstname: jwtData?.firstname || null,
-			lastname: jwtData?.lastname || null
+			lastname: jwtData?.lastname || null,
+			bio: jwtData?.bio || null,
+			country: jwtData?.country || null,
+			tel: jwtData?.tel || null
 		},
 		loginRoute: directTo,
 		login,

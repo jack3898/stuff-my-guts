@@ -70,7 +70,7 @@
 	}
 
 	label {
-		@apply text-sm flex flex-col max-w-xs;
+		@apply text-sm flex flex-col;
 	}
 
 	button {
@@ -90,6 +90,11 @@
 	}
 
 	input {
+		@apply max-w-xs;
+	}
+
+	input,
+	textarea {
 		@apply rounded border p-2;
 	}
 }

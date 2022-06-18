@@ -16,7 +16,7 @@ export default function Login() {
 	return (
 		<Main>
 			<Rows>
-				<div>
+				<section>
 					<h1>Welcome!</h1>
 					<p>You need to be logged in to use this website.</p>
 					<p>
@@ -32,8 +32,11 @@ export default function Login() {
 						<code>packages/database/src/seed-data/user.ts</code>. Ensure the database is
 						seeded with <code>npm run seed</code> first!
 					</p>
-				</div>
-				<LoginForm />
+				</section>
+				<section>
+					<h2>Login</h2>
+					<LoginForm />
+				</section>
 			</Rows>
 		</Main>
 	);
