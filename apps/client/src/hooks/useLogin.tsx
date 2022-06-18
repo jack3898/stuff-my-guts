@@ -2,7 +2,7 @@ import { FormEvent, useCallback } from 'react';
 import { useAuthenticateMutation } from '../generated/graphql';
 
 // TODO: Replace with Formik!
-export default function useLogin() {
+export default function useLogin(callback: (token: string) => void) {
 	const [authenticate, { data, error }] = useAuthenticateMutation();
 
 	const handleSubmit = useCallback((event: FormEvent) => {
@@ -20,5 +20,7 @@ export default function useLogin() {
 		authenticate({ variables: { email, password } }).catch(console.error);
 	}, []);
 
-	return { handleSubmit, token: data?.authenticate, error };
+	if (data?.authenticate) callback(data?.authenticate);
+
+	return { handleSubmit, error };
 }

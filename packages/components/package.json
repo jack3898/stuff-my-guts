@@ -4,7 +4,7 @@
 	"description": "React components for the app.",
 	"main": "src/index.ts",
 	"scripts": {
-		"//test": "jest",
+		"test": "jest",
 		"pre-commit": "ts-node pre-commit.ts"
 	},
 	"repository": {

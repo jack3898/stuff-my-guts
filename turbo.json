@@ -8,8 +8,7 @@
 			"outputs": ["dist"]
 		},
 		"test": {
-			"cache": true,
-			"outputs": ["src"]
+			"cache": false
 		},
 		"generate": {
 			"cache": false
