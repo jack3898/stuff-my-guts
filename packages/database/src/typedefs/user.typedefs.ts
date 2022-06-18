@@ -20,5 +20,12 @@ export const userTypeDefs = gql`
 
 	type Mutation {
 		authenticate(email: String!, password: String!): String
+		create(
+			email: String!
+			username: String!
+			firstname: String!
+			lastname: String!
+			password: String!
+		): Boolean
 	}
 `;

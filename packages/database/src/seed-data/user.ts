@@ -3,7 +3,6 @@ import prismaClient from '../prismaClient';
 
 const users: Prisma.UserCreateArgs['data'][] = [
 	{
-		id: 1,
 		firstname: 'Jack',
 		lastname: 'Wright',
 		username: 'jack',
@@ -13,7 +12,6 @@ const users: Prisma.UserCreateArgs['data'][] = [
 		bio: 'Made the app.'
 	},
 	{
-		id: 2,
 		firstname: 'Justin',
 		lastname: 'Collinsonemundo',
 		username: 'jman123',
@@ -22,7 +20,6 @@ const users: Prisma.UserCreateArgs['data'][] = [
 		bio: 'Author of the famous novel: How to accept that not being cool is a way of life.'
 	},
 	{
-		id: 3,
 		firstname: 'Amy',
 		lastname: 'Doobenshlinerando',
 		username: 'ayitmee',

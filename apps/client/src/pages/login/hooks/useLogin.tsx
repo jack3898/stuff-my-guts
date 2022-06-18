@@ -2,7 +2,7 @@ import { useAuthContext } from '@mealideas/components/src/hooks/useAuth';
 import { useFormik } from 'formik';
 import { useState } from 'react';
 import * as Yup from 'yup';
-import { useAuthenticateMutation } from '../generated/graphql';
+import { useAuthenticateMutation } from '../../../generated/graphql';
 
 const validationSchema = Yup.object({
 	email: Yup.string().email('Invalid email address').required('Required'),

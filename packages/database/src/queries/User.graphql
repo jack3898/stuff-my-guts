@@ -23,3 +23,19 @@ query User {
 mutation Authenticate($email: String!, $password: String!) {
 	authenticate(email: $email, password: $password)
 }
+
+mutation CreateUser(
+	$email: String!
+	$username: String!
+	$firstname: String!
+	$lastname: String!
+	$password: String!
+) {
+	create(
+		email: $email
+		username: $username
+		firstname: $firstname
+		lastname: $lastname
+		password: $password
+	)
+}

@@ -2,7 +2,7 @@ import { useAuthContext } from '@mealideas/components/src/hooks/useAuth';
 import { useFormik } from 'formik';
 import { useState } from 'react';
 import * as Yup from 'yup';
-import { useAuthenticateMutation } from '../generated/graphql';
+import { useCreateUserMutation } from '../../../generated/graphql';
 
 const validationSchema = Yup.object({
 	email: Yup.string().email('Invalid email address').required('Required'),
@@ -13,9 +13,9 @@ const validationSchema = Yup.object({
 });
 
 export default function useSignup() {
-	const { login, tokenData } = useAuthContext();
+	const { token, tokenData } = useAuthContext();
 	const [error, setError] = useState<Error | null>(null);
-	const [authenticate] = useAuthenticateMutation();
+	const [createUser] = useCreateUserMutation();
 
 	const formik = useFormik({
 		validationSchema,
@@ -27,7 +27,16 @@ export default function useSignup() {
 			password: ''
 		},
 		onSubmit: (variables) => {
-			alert(JSON.stringify(variables));
+			if (token) {
+				const error = new Error('Already logged in! Please log out first.');
+				console.error(error);
+				setError(error);
+			}
+
+			createUser({ variables }).catch((error) => {
+				console.error(error);
+				setError(error);
+			});
 		}
 	});
 

@@ -37,6 +37,30 @@ export const userResolvers = {
 			}
 
 			throw new AuthenticationError('Invalid email and/or password!');
-		}
+		},
+		create: async (
+			root: unknown,
+			{
+				email,
+				username,
+				firstname,
+				lastname,
+				password
+			}: {
+				email: string;
+				username: string;
+				firstname: string;
+				lastname: string;
+				password: string;
+			}
+		) =>
+			new Promise((resolve, reject) => {
+				prisma.user
+					.create({
+						data: { email, firstname, lastname, password, username } // TODO: use bCrypt
+					})
+					.then((user) => resolve(!!user))
+					.catch(reject);
+			})
 	}
 };
