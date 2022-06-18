@@ -18,14 +18,27 @@ const client = new ApolloClient({
 function App() {
 	return (
 		<ApolloProvider client={client}>
-			<Header title="Stuff My Guts" tagline="Inspiring your next meal" />
 			<Suspense>
 				<AuthContextProvider directTo="login">
 					<BrowserRouter>
+						<Header title="Stuff My Guts" tagline="Inspiring your next meal" />
 						<Routes>
+							<Route path="*" element={<Home />} />
 							<Route path="/" element={<Home />} />
 							<Route path="login" element={<Login />} />
 							<Route path="signup" element={<Signup />} />
+							<Route
+								path="account"
+								element={<p className="text-center">Coming soon!</p>}
+							/>
+							<Route
+								path="planner"
+								element={<p className="text-center">Coming soon!</p>}
+							/>
+							<Route
+								path="create"
+								element={<p className="text-center">Coming soon!</p>}
+							/>
 						</Routes>
 					</BrowserRouter>
 				</AuthContextProvider>

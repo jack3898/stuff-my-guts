@@ -1,11 +1,16 @@
+import { useEffect } from 'react';
 import useSignup from '../hooks/useSignup';
 
 export default function SignupForm() {
 	const {
 		formik: { getFieldProps, handleSubmit, errors },
 		authError,
-		tokenData
+		success
 	} = useSignup();
+
+	useEffect(() => {
+		if (success) alert('Congrats! You now have an account!'); // TODO: remove this alert
+	}, [success]);
 
 	return (
 		<>

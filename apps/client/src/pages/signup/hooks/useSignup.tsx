@@ -13,7 +13,8 @@ const validationSchema = Yup.object({
 });
 
 export default function useSignup() {
-	const { token, tokenData } = useAuthContext();
+	const { token } = useAuthContext();
+	const [success, setSuccess] = useState<boolean | null>(null);
 	const [error, setError] = useState<Error | null>(null);
 	const [createUser] = useCreateUserMutation();
 
@@ -33,12 +34,14 @@ export default function useSignup() {
 				setError(error);
 			}
 
-			createUser({ variables }).catch((error) => {
-				console.error(error);
-				setError(error);
-			});
+			createUser({ variables })
+				.then(({ data }) => setSuccess(!!data?.create))
+				.catch((error) => {
+					console.error(error);
+					setError(error);
+				});
 		}
 	});
 
-	return { formik, authError: error, tokenData };
+	return { formik, authError: error, success };
 }

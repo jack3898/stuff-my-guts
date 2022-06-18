@@ -1,11 +1,17 @@
 import Main from '@mealideas/components/src/core-page/Main';
 import Rows from '@mealideas/components/src/core-page/Rows';
 import { useAuthContext } from '@mealideas/components/src/hooks/useAuth';
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import LoginForm from './components/LoginForm';
 
 export default function Login() {
-	const { tokenData } = useAuthContext();
+	const { token } = useAuthContext();
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (token) navigate('/');
+	}, [token]);
 
 	return (
 		<Main>
@@ -22,13 +28,12 @@ export default function Login() {
 						world's your oyster. :)
 					</p>
 					<p>
-						Login credentials can be found in{' '}
+						Sample login credentials can be found in{' '}
 						<code>packages/database/src/seed-data/user.ts</code>. Ensure the database is
 						seeded with <code>npm run seed</code> first!
 					</p>
 				</div>
 				<LoginForm />
-				<section>{tokenData.firstname && <h2>Hello {tokenData.firstname}!</h2>}</section>
 			</Rows>
 		</Main>
 	);

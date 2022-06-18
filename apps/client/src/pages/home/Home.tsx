@@ -14,12 +14,6 @@ export default function Home() {
 						Hey, {tokenData.firstname} {tokenData.lastname}!
 					</p>
 				</section>
-				<section>
-					<h2>Logout</h2>
-					<button className="btn-primary" onClick={logout}>
-						Log me out boi
-					</button>
-				</section>
 			</Rows>
 		</Main>
 	);
