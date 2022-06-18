@@ -1,26 +1,37 @@
-import { FormEvent, useCallback } from 'react';
+import { useAuthContext } from '@mealideas/components/src/hooks/useAuth';
+import { useFormik } from 'formik';
+import { useState } from 'react';
+import * as Yup from 'yup';
 import { useAuthenticateMutation } from '../generated/graphql';
 
-// TODO: Replace with Formik!
-export default function useLogin(callback: (token: string) => void) {
-	const [authenticate, { data, error }] = useAuthenticateMutation();
+const validationSchema = Yup.object({
+	email: Yup.string().email('Invalid email address').required('Required'),
+	password: Yup.string().required('Required')
+});
 
-	const handleSubmit = useCallback((event: FormEvent) => {
-		event.preventDefault();
+export default function useLogin() {
+	const { login, tokenData } = useAuthContext();
+	const [error, setError] = useState<Error | null>(null);
+	const [authenticate] = useAuthenticateMutation();
 
-		const { email, password } = Object.values(event.currentTarget).reduce(
-			(accumulator, { name, value }) => {
-				if (!name) return accumulator;
-				accumulator[name] = value;
-				return accumulator;
-			},
-			{}
-		);
+	const formik = useFormik({
+		validationSchema,
+		initialValues: {
+			email: '',
+			password: ''
+		},
+		onSubmit: (variables) => {
+			authenticate({ variables })
+				.then(({ data }) => {
+					if (data?.authenticate) login(data.authenticate);
+					setError(null);
+				})
+				.catch((error) => {
+					console.error(error);
+					setError(error);
+				});
+		}
+	});
 
-		authenticate({ variables: { email, password } }).catch(console.error);
-	}, []);
-
-	if (data?.authenticate) callback(data?.authenticate);
-
-	return { handleSubmit, error };
+	return { formik, authError: error, tokenData };
 }
