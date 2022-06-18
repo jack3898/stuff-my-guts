@@ -14,7 +14,8 @@ const server = new ApolloServer({
 	resolvers,
 	typeDefs: mergedTypeDefs,
 	introspection: true,
-	plugins: [ApolloServerPluginLandingPageLocalDefault]
+	plugins: [ApolloServerPluginLandingPageLocalDefault],
+	cache: 'bounded'
 });
 
 server.listen({ port: 3001 }).then(() => {
