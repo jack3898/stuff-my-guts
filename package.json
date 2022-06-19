@@ -33,6 +33,7 @@
 		"turbo": "^1.2.16"
 	},
 	"devDependencies": {
+		"@commitlint/config-conventional": "^17.0.2",
 		"husky": "^8.0.1",
 		"prettier": "^2.6.2"
 	}
