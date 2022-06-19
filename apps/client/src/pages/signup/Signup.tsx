@@ -23,13 +23,6 @@ export default function Signup() {
 					<h2>Sign up</h2>
 					<SignupForm />
 				</section>
-				<section>
-					<h2>Note:</h2>
-					<p>
-						This page currently does not function, as the backend has not yet been
-						configured for sign-ups.
-					</p>
-				</section>
 			</Rows>
 		</Main>
 	);

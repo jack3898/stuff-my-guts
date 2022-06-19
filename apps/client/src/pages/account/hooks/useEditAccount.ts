@@ -1,14 +1,8 @@
 import { useAuthContext } from '@mealideas/components/src/hooks/useAuth';
+import { updateUserValidation } from '@mealideas/validation/src/user.validation';
 import { useFormik } from 'formik';
 import { useState } from 'react';
-import * as Yup from 'yup';
 import { useEditUserMutation } from '../../../generated/graphql';
-
-const validationSchema = Yup.object({
-	newEmail: Yup.string().email('Invalid email address'),
-	newPassword: Yup.string().min(8, 'Password is too short'),
-	currentPassword: Yup.string().required('Required to authorise changes to your account!')
-});
 
 export default function useEditAccount() {
 	const { logout, tokenData, token } = useAuthContext();
@@ -16,7 +10,7 @@ export default function useEditAccount() {
 	const [editUser] = useEditUserMutation();
 
 	const formik = useFormik({
-		validationSchema,
+		validationSchema: updateUserValidation,
 		initialValues: {
 			username: tokenData.username,
 			newEmail: tokenData.email,

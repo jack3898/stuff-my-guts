@@ -28,12 +28,12 @@
 		"@mealideas/components": "*",
 		"@mealideas/database": "*",
 		"@mealideas/utils": "*",
+		"@mealideas/validation": "*",
 		"formik": "^2.2.9",
 		"graphql": "^16.5.0",
 		"react": "^18.1.0",
 		"react-dom": "^18.1.0",
-		"react-router-dom": "^6.3.0",
-		"yup": "^0.32.11"
+		"react-router-dom": "^6.3.0"
 	},
 	"devDependencies": {
 		"@graphql-codegen/cli": "2.6.2",

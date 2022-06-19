@@ -1,16 +1,8 @@
 import { useAuthContext } from '@mealideas/components/src/hooks/useAuth';
+import { createUserValidation } from '@mealideas/validation/src/user.validation';
 import { useFormik } from 'formik';
 import { useState } from 'react';
-import * as Yup from 'yup';
 import { useCreateUserMutation } from '../../../generated/graphql';
-
-const validationSchema = Yup.object({
-	email: Yup.string().email('Invalid email address').required('Required'),
-	username: Yup.string().required('Required'),
-	firstname: Yup.string().required('Required'),
-	lastname: Yup.string().required('Required'),
-	password: Yup.string().min(8, 'Password is too short').required('Required')
-});
 
 export default function useSignup() {
 	const { token } = useAuthContext();
@@ -19,7 +11,7 @@ export default function useSignup() {
 	const [createUser] = useCreateUserMutation();
 
 	const formik = useFormik({
-		validationSchema,
+		validationSchema: createUserValidation,
 		initialValues: {
 			email: '',
 			username: '',

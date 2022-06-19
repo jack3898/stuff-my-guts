@@ -1,4 +1,8 @@
 import { ROOT } from '@mealideas/paths';
+import {
+	createUserValidation,
+	updateUserValidation
+} from '@mealideas/validation/src/user.validation';
 import { AuthenticationError } from 'apollo-server';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
@@ -10,6 +14,26 @@ dotenv.config({
 	path: path.resolve(ROOT, '.env')
 });
 
+type AuthenticateInput = {
+	email: string;
+	password: string;
+};
+
+type CreateInput = {
+	email: string;
+	username: string;
+	firstname: string;
+	lastname: string;
+	password: string;
+};
+
+type UpdateAccountInput = {
+	newEmail?: string;
+	newPassword?: string;
+	currentPassword: string;
+	token: string;
+};
+
 export const userResolvers = {
 	Query: {
 		user: () => {
@@ -20,12 +44,9 @@ export const userResolvers = {
 		}
 	},
 	Mutation: {
-		authenticate: async (
-			root: unknown,
-			{ email, password }: { email: string; password: string }
-		) => {
-			const user = await prisma.user.findFirst({ where: { email } });
-			const validPassword = await bcrypt.compare(password, String(user?.password));
+		authenticate: async (root: unknown, input: AuthenticateInput) => {
+			const user = await prisma.user.findFirst({ where: { email: input.email } });
+			const validPassword = await bcrypt.compare(input.password, String(user?.password));
 
 			if (user && validPassword) {
 				const { id, username, firstname, lastname, email, bio, country, tel } = user;
@@ -48,70 +69,52 @@ export const userResolvers = {
 
 			throw new AuthenticationError('Invalid email and/or password!');
 		},
-		create: async (
-			root: unknown,
-			{
-				email,
-				username,
-				firstname,
-				lastname,
-				password
-			}: {
-				email: string;
-				username: string;
-				firstname: string;
-				lastname: string;
-				password: string;
-			}
-		) => {
-			try {
-				const salt = await bcrypt.genSalt(11);
-				const hashedPassword = await bcrypt.hash(password, salt);
+		create: async (root: unknown, input: CreateInput) => {
+			const salt = await bcrypt.genSalt(11);
+			const hashedPassword = await bcrypt.hash(input.password, salt);
 
-				const user = await prisma.user.create({
-					data: { email, firstname, lastname, password: hashedPassword, username }
-				});
+			await createUserValidation.validate(input);
 
-				return !!user;
-			} catch (error: any) {
-				throw Error(error);
-			}
+			const { email, username, firstname, lastname } = input;
+
+			const createdUser = await prisma.user.create({
+				data: { email, firstname, lastname, password: hashedPassword, username }
+			});
+
+			return !!createdUser;
 		},
-		updateAccount: async (
-			root: unknown,
-			{
-				newEmail,
-				newPassword,
-				currentPassword,
-				token
-			}: {
-				newEmail?: string;
-				newPassword?: string;
-				currentPassword: string;
-				token: string;
-			}
-		) => {
-			const validJwt = jwt.verify(token, process.env.JWT_SECRET!) as {
+		updateAccount: async (root: unknown, input: UpdateAccountInput) => {
+			const validJwt = jwt.verify(input.token, process.env.JWT_SECRET!) as {
 				id: number;
 				password: string;
 			};
 
-			const user = await prisma.user.findFirst({
+			const currentUser = await prisma.user.findFirst({
 				select: { password: true, email: true },
 				where: { id: validJwt.id }
 			});
 
-			const validPassword = await bcrypt.compare(currentPassword, String(user?.password));
+			await updateUserValidation.validate(input);
 
-			if (!validPassword || !user) {
+			const validPassword = await bcrypt.compare(
+				input.currentPassword,
+				String(currentUser?.password)
+			);
+
+			if (!validPassword || !currentUser) {
 				throw new AuthenticationError('Invalid password!');
 			}
 
-			if ((newPassword !== user.password || newEmail !== user.email) && validJwt.id) {
+			const { newEmail, newPassword } = input;
+
+			if (
+				(newPassword !== currentUser.password || newEmail !== currentUser.email) &&
+				validJwt.id
+			) {
 				const salt = await bcrypt.genSalt(11);
 				const newHashedPassword = newPassword
 					? await bcrypt.hash(newPassword, salt)
-					: user.password;
+					: currentUser.password;
 
 				await prisma.user.update({
 					where: {

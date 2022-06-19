@@ -4,6 +4,7 @@
 	"description": "Queries, schemas, resolvers and more.",
 	"main": "src/index.ts",
 	"scripts": {
+		"test": "jest",
 		"pre-commit": "ts-node pre-commit.ts"
 	},
 	"repository": {
@@ -18,9 +19,11 @@
 	"homepage": "https://github.com/jack3898/meal-ideas#readme",
 	"devDependencies": {
 		"@mealideas/depcheck": "^1.0.0",
+		"@mealideas/jest": "^1.0.0",
 		"@mealideas/tsconfig": "*",
 		"@types/bcrypt": "^5.0.0",
 		"depcheck": "^1.4.3",
+		"jest": "^28.1.1",
 		"ts-node": "^10.8.1"
 	},
 	"peerDependencies": {
@@ -28,6 +31,7 @@
 	},
 	"dependencies": {
 		"@mealideas/paths": "*",
+		"@mealideas/validation": "^1.0.0",
 		"@prisma/client": "^3.15.1",
 		"apollo-server": "^3.8.2",
 		"bcrypt": "^5.0.1",
