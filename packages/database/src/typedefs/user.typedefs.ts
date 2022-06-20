@@ -1,6 +1,8 @@
 import { gql } from 'apollo-server';
 
 export const userTypeDefs = gql`
+	directive @upper on FIELD_DEFINITION
+
 	type User {
 		id: ID!
 		firstname: String!

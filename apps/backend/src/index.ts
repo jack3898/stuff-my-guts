@@ -1,18 +1,24 @@
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import { stitchSchemas } from '@graphql-tools/stitch';
-import { resolvers, typeDefs } from '@mealideas/database';
+import { stitchingDirectives } from '@graphql-tools/stitching-directives';
+import { customDirectives, resolvers, typeDefs } from '@mealideas/database';
 import { ApolloServer } from 'apollo-server';
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 
-const mergedTypeDefs = stitchSchemas({
-	subschemas: typeDefs.map((schema) => ({
-		schema: makeExecutableSchema({ typeDefs: schema })
-	}))
+let mergedTypeDefs = stitchSchemas({
+	subschemas: typeDefs.map((schemaItem) => ({
+		schema: makeExecutableSchema({ typeDefs: schemaItem })
+	})),
+	subschemaConfigTransforms: [stitchingDirectives().stitchingDirectivesTransformer],
+	resolvers,
+	mergeDirectives: true
 });
 
+mergedTypeDefs = customDirectives.authenticated(mergedTypeDefs, 'upper');
+
 const server = new ApolloServer({
-	resolvers,
-	typeDefs: mergedTypeDefs,
+	schema: mergedTypeDefs,
+	csrfPrevention: true,
 	introspection: true,
 	plugins: [ApolloServerPluginLandingPageLocalDefault],
 	cache: 'bounded'
