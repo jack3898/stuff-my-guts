@@ -4,6 +4,7 @@
 	"description": "A simple app that intelligently chooses your meals for you from your input.",
 	"main": "index.js",
 	"scripts": {
+		"postinstall": "npm run generate",
 		"dev": "turbo run dev --parallel",
 		"build": "turbo run build --parallel",
 		"build:nocache": "turbo run build --parallel --no-cache",
