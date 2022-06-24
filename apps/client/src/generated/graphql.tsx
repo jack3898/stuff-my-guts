@@ -25,7 +25,7 @@ export type Meal = {
 
 export type Mutation = {
 	__typename?: 'Mutation';
-	authenticate?: Maybe<Scalars['String']>;
+	authenticate?: Maybe<Scalars['Boolean']>;
 	create?: Maybe<Scalars['Boolean']>;
 	updateAccount?: Maybe<Scalars['Boolean']>;
 };
@@ -120,7 +120,7 @@ export type AuthenticateMutationVariables = Exact<{
 	password: Scalars['String'];
 }>;
 
-export type AuthenticateMutation = { __typename?: 'Mutation'; authenticate?: string | null };
+export type AuthenticateMutation = { __typename?: 'Mutation'; authenticate?: boolean | null };
 
 export type CreateUserMutationVariables = Exact<{
 	email: Scalars['String'];

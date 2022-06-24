@@ -16,7 +16,6 @@ export type AuthData = {
 	};
 	token: string | null;
 	loginRoute: string;
-	login: (token: string) => void;
 	logout: () => void;
 };
 
@@ -40,7 +39,6 @@ const AuthContext = createContext({
 		country: null
 	},
 	loginRoute: '/',
-	login: () => {},
 	logout: () => {}
 } as AuthData);
 
@@ -51,7 +49,6 @@ export function AuthContextProvider({ children, directTo }: AuthContextProviderP
 	const [jwtData, setJwtData] = useState<AuthData['tokenData'] | null>(null);
 	const authToken = cookies['auth-token'] || null;
 
-	const login = (token: string) => setCookie('auth-token', token);
 	const logout = () => removeCookie('auth-token');
 
 	useMemo(() => {
@@ -77,7 +74,6 @@ export function AuthContextProvider({ children, directTo }: AuthContextProviderP
 			tel: jwtData?.tel || null
 		},
 		loginRoute: directTo,
-		login,
 		logout
 	};
 

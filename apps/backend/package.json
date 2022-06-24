@@ -27,7 +27,8 @@
 		"@mealideas/paths": "*",
 		"@mealideas/validation": "*",
 		"apollo-server": "^3.8.2",
-		"apollo-server-core": "^3.8.2"
+		"apollo-server-core": "^3.8.2",
+		"dotenv": "^16.0.1"
 	},
 	"devDependencies": {
 		"@mealideas/tsconfig": "*",

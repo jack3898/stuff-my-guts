@@ -1,7 +1,7 @@
 import { gql } from 'apollo-server';
 
 export const userTypeDefs = gql`
-	directive @upper on FIELD_DEFINITION
+	directive @authorise on FIELD_DEFINITION
 
 	type User {
 		id: ID!
@@ -21,7 +21,7 @@ export const userTypeDefs = gql`
 	}
 
 	type Mutation {
-		authenticate(email: String!, password: String!): String
+		authenticate(email: String!, password: String!): Boolean
 		create(
 			email: String!
 			username: String!

@@ -1,1 +1,2 @@
-export { default as authenticated } from './upper';
+export { default as authenticate } from './authenticate';
+export { default as upper } from './upper';

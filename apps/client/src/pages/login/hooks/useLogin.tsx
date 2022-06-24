@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useAuthenticateMutation } from '../../../generated/graphql';
 
 export default function useLogin() {
-	const { login, tokenData } = useAuthContext();
+	const { tokenData } = useAuthContext();
 	const [error, setError] = useState<Error | null>(null);
 	const [authenticate] = useAuthenticateMutation();
 
@@ -17,8 +17,7 @@ export default function useLogin() {
 		},
 		onSubmit: (variables) => {
 			authenticate({ variables })
-				.then(({ data }) => {
-					if (data?.authenticate) login(data.authenticate);
+				.then(() => {
 					setError(null);
 				})
 				.catch((error) => {

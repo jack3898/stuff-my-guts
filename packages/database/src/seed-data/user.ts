@@ -31,6 +31,7 @@ const users: Prisma.UserCreateArgs['data'][] = [
 
 export const usersSeeder = async () => {
 	const progress = users.map((user) => {
+		// @ts-ignore create does exist
 		return userResolvers.Mutation.create(null, user);
 	});
 

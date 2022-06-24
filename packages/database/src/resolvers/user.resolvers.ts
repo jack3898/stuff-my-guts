@@ -1,3 +1,4 @@
+import { IResolvers } from '@graphql-tools/utils';
 import { ROOT } from '@mealideas/paths';
 import {
 	createUserValidation,
@@ -8,6 +9,7 @@ import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import path from 'path';
+import { Context } from '../../types/Context';
 import prisma from '../prismaClient';
 
 dotenv.config({
@@ -34,7 +36,7 @@ type UpdateAccountInput = {
 	token: string;
 };
 
-export const userResolvers = {
+export const userResolvers: IResolvers<any, Context> = {
 	Query: {
 		user: () => {
 			return prisma.user.findFirst();
@@ -44,14 +46,14 @@ export const userResolvers = {
 		}
 	},
 	Mutation: {
-		authenticate: async (root: unknown, input: AuthenticateInput) => {
+		authenticate: async (root: unknown, input: AuthenticateInput, context) => {
 			const user = await prisma.user.findFirst({ where: { email: input.email } });
 			const validPassword = await bcrypt.compare(input.password, String(user?.password));
 
 			if (user && validPassword) {
 				const { id, username, firstname, lastname, email, bio, country, tel } = user;
 
-				return jwt.sign(
+				const token = jwt.sign(
 					{
 						id,
 						username,
@@ -65,6 +67,10 @@ export const userResolvers = {
 					process.env.JWT_SECRET!,
 					{}
 				);
+
+				context.res.cookie('auth-token', token, { sameSite: 'none', secure: true });
+
+				return true;
 			}
 
 			throw new AuthenticationError('Invalid email and/or password!');

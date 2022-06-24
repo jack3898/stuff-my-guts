@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"description": "Utility functions for Node and browser environments.",
 	"scripts": {
-		"test": "jest"
+		"test": "jest --passWithNoTests"
 	},
 	"repository": {
 		"type": "git",
