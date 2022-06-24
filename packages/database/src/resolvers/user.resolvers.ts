@@ -1,4 +1,3 @@
-import { IResolvers } from '@graphql-tools/utils';
 import { ROOT } from '@mealideas/paths';
 import {
 	createUserValidation,
@@ -36,7 +35,7 @@ type UpdateAccountInput = {
 	token: string;
 };
 
-export const userResolvers: IResolvers<any, Context> = {
+export const userResolvers = {
 	Query: {
 		user: () => {
 			return prisma.user.findFirst();
@@ -46,7 +45,7 @@ export const userResolvers: IResolvers<any, Context> = {
 		}
 	},
 	Mutation: {
-		authenticate: async (root: unknown, input: AuthenticateInput, context) => {
+		authenticate: async (root: unknown, input: AuthenticateInput, context: Context) => {
 			const user = await prisma.user.findFirst({ where: { email: input.email } });
 			const validPassword = await bcrypt.compare(input.password, String(user?.password));
 
