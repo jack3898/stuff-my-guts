@@ -1,5 +1,5 @@
 import { getDirective, MapperKind, mapSchema } from '@graphql-tools/utils';
-import { verify } from '@mealideas/utils/src/node/jwt';
+import { verifyJwt } from '@mealideas/utils/src/node/jwt';
 import { AuthenticationError } from 'apollo-server';
 import cookie from 'cookie';
 import { defaultFieldResolver, GraphQLFieldConfig, GraphQLSchema } from 'graphql';
@@ -46,7 +46,7 @@ function modifyCurrentFieldWithAuthMiddleware(fieldConfig: GraphQLFieldConfig<an
 		const result = await resolve(source, args, context, info);
 		const token = cookie.parse(context.user.token)['auth-token'];
 
-		if (verify(token)) {
+		if (verifyJwt(token)) {
 			return result;
 		}
 

@@ -36,7 +36,6 @@
 		"@mealideas/validation": "*",
 		"@prisma/client": "^3.15.1",
 		"apollo-server": "^3.8.2",
-		"bcrypt": "^5.0.1",
 		"cookie": "^0.5.0",
 		"jsonwebtoken": "^8.5.1"
 	}

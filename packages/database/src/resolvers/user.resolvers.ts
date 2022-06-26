@@ -1,10 +1,11 @@
 import rootenv from '@mealideas/utils/src/node/env';
+import { createHash, verifyHash } from '@mealideas/utils/src/node/hash';
+import { decodeJwt } from '@mealideas/utils/src/node/jwt';
 import {
 	createUserValidation,
 	updateUserValidation
 } from '@mealideas/validation/src/user.validation';
 import { AuthenticationError } from 'apollo-server';
-import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { Context } from '../../types/Context';
 import prisma from '../prismaClient';
@@ -43,7 +44,7 @@ export const userResolvers = {
 	Mutation: {
 		authenticate: async (root: unknown, input: AuthenticateInput, { res, client }: Context) => {
 			const user = await client.user.findFirst({ where: { email: input.email } });
-			const validPassword = await bcrypt.compare(input.password, String(user?.password));
+			const validPassword = await verifyHash(input.password, user?.password);
 
 			if (user && validPassword) {
 				const { id, username, firstname, lastname, email, bio, country, tel } = user;
@@ -63,10 +64,7 @@ export const userResolvers = {
 					{}
 				);
 
-				res.cookie('auth-token', token, {
-					sameSite: 'none',
-					secure: true
-				});
+				res.cookie('auth-token', token, { sameSite: 'none', secure: true });
 
 				return true;
 			}
@@ -74,8 +72,7 @@ export const userResolvers = {
 			throw new AuthenticationError('Invalid email and/or password!');
 		},
 		create: async (root: unknown, input: CreateInput, { client }: Context) => {
-			const salt = await bcrypt.genSalt(11);
-			const hashedPassword = await bcrypt.hash(input.password, salt);
+			const hashedPassword = await createHash(input.password);
 
 			await createUserValidation.validate(input);
 
@@ -88,10 +85,7 @@ export const userResolvers = {
 			return !!createdUser;
 		},
 		updateAccount: async (root: unknown, input: UpdateAccountInput, { client }: Context) => {
-			const validJwt = jwt.verify(input.token, process.env.JWT_SECRET!) as {
-				id: number;
-				password: string;
-			};
+			const validJwt = decodeJwt<{ id: number; password: string }>(input.token);
 
 			const currentUser = await client.user.findFirst({
 				select: { password: true, email: true },
@@ -100,10 +94,7 @@ export const userResolvers = {
 
 			await updateUserValidation.validate(input);
 
-			const validPassword = await bcrypt.compare(
-				input.currentPassword,
-				String(currentUser?.password)
-			);
+			const validPassword = await verifyHash(input.currentPassword, currentUser?.password);
 
 			if (!validPassword || !currentUser) {
 				throw new AuthenticationError('Invalid password!');
@@ -115,19 +106,13 @@ export const userResolvers = {
 				(newPassword !== currentUser.password || newEmail !== currentUser.email) &&
 				validJwt.id
 			) {
-				const salt = await bcrypt.genSalt(11);
 				const newHashedPassword = newPassword
-					? await bcrypt.hash(newPassword, salt)
+					? await createHash(newPassword)
 					: currentUser.password;
 
 				await client.user.update({
-					where: {
-						id: validJwt.id
-					},
-					data: {
-						password: newHashedPassword,
-						email: newEmail
-					}
+					where: { id: validJwt.id },
+					data: { password: newHashedPassword, email: newEmail }
 				});
 			}
 

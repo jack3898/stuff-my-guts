@@ -21,6 +21,7 @@
 	},
 	"dependencies": {
 		"@mealideas/paths": "*",
+		"bcrypt": "^5.0.1",
 		"dotenv": "^16.0.1",
 		"jsonwebtoken": "^8.5.1"
 	}
