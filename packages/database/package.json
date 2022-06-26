@@ -6,7 +6,7 @@
 	"scripts": {
 		"test": "jest --passWithNoTests",
 		"pre-commit": "ts-node pre-commit.ts",
-		"generate": "graphql-codegen --config codegen.yml"
+		"generate": "graphql-codegen"
 	},
 	"repository": {
 		"type": "git",
@@ -21,8 +21,9 @@
 	"devDependencies": {
 		"@graphql-codegen/cli": "^2.6.2",
 		"@graphql-codegen/typescript-resolvers": "^2.6.6",
-		"@mealideas/depcheck": "^1.0.0",
-		"@mealideas/jest": "^1.0.0",
+		"@mealideas/depcheck": "*",
+		"@mealideas/graphql-codegen": "*",
+		"@mealideas/jest": "*",
 		"@mealideas/tsconfig": "*",
 		"@types/bcrypt": "^5.0.0",
 		"depcheck": "^1.4.3",

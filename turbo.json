@@ -19,9 +19,6 @@
 		"seed:init": {
 			"cache": false
 		},
-		"generate-query-hooks": {
-			"cache": false
-		},
 		"pre-commit": {
 			"cache": false
 		}

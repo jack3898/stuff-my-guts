@@ -12,7 +12,6 @@
 		"test:nocache": "turbo run test --parallel --no-cache",
 		"generate": "turbo run generate --parallel",
 		"seed": "turbo run seed:init && turbo run seed",
-		"generate-query-hooks": "turbo run generate-query-hooks",
 		"prepare": "husky install",
 		"pre-commit": "turbo run pre-commit --parallel"
 	},

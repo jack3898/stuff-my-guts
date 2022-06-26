@@ -6,7 +6,7 @@
 	"scripts": {
 		"dev": "ts-node app.serve.ts",
 		"build": "ts-node app.build.ts",
-		"generate-query-hooks": "graphql-codegen --config codegen.yml",
+		"generate": "graphql-codegen",
 		"test": "jest --passWithNoTests",
 		"pre-commit": "ts-node pre-commit.ts"
 	},
@@ -42,6 +42,7 @@
 		"@graphql-codegen/typescript-operations": "2.4.2",
 		"@graphql-codegen/typescript-react-apollo": "3.2.16",
 		"@mealideas/depcheck": "*",
+		"@mealideas/graphql-codegen": "*",
 		"@mealideas/jest": "*",
 		"@mealideas/paths": "*",
 		"@mealideas/tailwind": "*",

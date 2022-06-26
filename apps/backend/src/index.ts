@@ -24,7 +24,6 @@ mergedTypeDefs = customDirectives.auth().directiveTransformer(mergedTypeDefs, 'a
 const server = new ApolloServer({
 	schema: mergedTypeDefs,
 	csrfPrevention: true,
-	introspection: true,
 	plugins: [ApolloServerPluginLandingPageLocalDefault],
 	cache: 'bounded',
 	cors: {
