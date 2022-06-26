@@ -1,0 +1,11 @@
+{
+	"recommendations": [
+		"esbenp.prettier-vscode",
+		"eamodio.gitlens",
+		"Prisma.prisma",
+		"bradlc.vscode-tailwindcss",
+		"GraphQL.vscode-graphql",
+		"ms-azuretools.vscode-docker",
+		"apollographql.vscode-apollo"
+	]
+}
