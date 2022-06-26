@@ -1,19 +1,15 @@
-import { ROOT } from '@mealideas/paths';
+import rootenv from '@mealideas/utils/src/node/env';
 import {
 	createUserValidation,
 	updateUserValidation
 } from '@mealideas/validation/src/user.validation';
 import { AuthenticationError } from 'apollo-server';
 import bcrypt from 'bcrypt';
-import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
-import path from 'path';
 import { Context } from '../../types/Context';
 import prisma from '../prismaClient';
 
-dotenv.config({
-	path: path.resolve(ROOT, '.env')
-});
+rootenv();
 
 type AuthenticateInput = {
 	email: string;

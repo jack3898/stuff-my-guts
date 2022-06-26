@@ -1,10 +1,10 @@
 import { ROOT } from '@mealideas/paths';
-import dotenv from 'dotenv';
+import rootenv from '@mealideas/utils/src/node/env';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import path from 'path';
 import { Configuration as WebpackConfig } from 'webpack';
 
-dotenv.config({ path: path.resolve(ROOT, '.env') });
+rootenv();
 
 const APP_DIR = path.resolve();
 const CONFIG_DIR = path.resolve(__dirname);
