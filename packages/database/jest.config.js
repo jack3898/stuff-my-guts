@@ -8,8 +8,7 @@ const override = {
 		'ts-jest': {
 			tsconfig: './tsconfig.json'
 		}
-	},
-	setupFiles: [path.resolve('.jest', 'setEnvVars.js')]
+	}
 };
 
 module.exports = Object.assign(base, override);
