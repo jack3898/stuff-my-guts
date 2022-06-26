@@ -5,7 +5,8 @@
 	"main": "src/index.ts",
 	"scripts": {
 		"test": "jest --passWithNoTests",
-		"pre-commit": "ts-node pre-commit.ts"
+		"pre-commit": "ts-node pre-commit.ts",
+		"generate": "graphql-codegen --config codegen.yml"
 	},
 	"repository": {
 		"type": "git",
@@ -18,6 +19,8 @@
 	},
 	"homepage": "https://github.com/jack3898/meal-ideas#readme",
 	"devDependencies": {
+		"@graphql-codegen/cli": "^2.6.2",
+		"@graphql-codegen/typescript-resolvers": "^2.6.6",
 		"@mealideas/depcheck": "^1.0.0",
 		"@mealideas/jest": "^1.0.0",
 		"@mealideas/tsconfig": "*",
@@ -36,7 +39,6 @@
 		"@mealideas/validation": "*",
 		"@prisma/client": "^3.15.1",
 		"apollo-server": "^3.8.2",
-		"cookie": "^0.5.0",
-		"jsonwebtoken": "^8.5.1"
+		"cookie": "^0.5.0"
 	}
 }

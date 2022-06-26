@@ -31,6 +31,7 @@ describe('user resolver', () => {
 	afterEach(() => jest.clearAllMocks());
 
 	it('should authenticate a user', async () => {
+		// @ts-ignore
 		const result = await userResolvers.Mutation.authenticate(
 			null,
 			{
@@ -49,6 +50,7 @@ describe('user resolver', () => {
 	});
 
 	it('should throw an AuthenticationError when invalid credentials are provided', async () => {
+		// @ts-ignore
 		const result = userResolvers.Mutation.authenticate(
 			null,
 			{
@@ -62,6 +64,7 @@ describe('user resolver', () => {
 	});
 
 	it('should create a new user', async () => {
+		// @ts-ignore
 		const result = userResolvers.Mutation.create(
 			null,
 			{
@@ -78,6 +81,7 @@ describe('user resolver', () => {
 	});
 
 	it("should validate a new user's details", async () => {
+		// @ts-ignore
 		const result = userResolvers.Mutation.create(
 			null,
 			{
@@ -95,6 +99,7 @@ describe('user resolver', () => {
 	});
 
 	it('should edit a current user', async () => {
+		// @ts-ignore
 		const result = userResolvers.Mutation.updateAccount(
 			null,
 			{
@@ -110,6 +115,7 @@ describe('user resolver', () => {
 	});
 
 	it('should validate an edited user', async () => {
+		// @ts-ignore
 		const result = userResolvers.Mutation.updateAccount(
 			null,
 			{

@@ -3,7 +3,7 @@ import { verifyJwt } from '@mealideas/utils/src/node/jwt';
 import { AuthenticationError } from 'apollo-server';
 import cookie from 'cookie';
 import { defaultFieldResolver, GraphQLFieldConfig, GraphQLSchema } from 'graphql';
-import { Context } from '../../types/Context';
+import { Context } from '../types';
 
 export default function authDirective() {
 	const typeDirectiveArgumentMaps = new Map<string, unknown>();

@@ -1,0 +1,12 @@
+overwrite: true
+schema: 'src/typedefs'
+generates:
+    src/generated/graphql.ts:
+        plugins:
+            - '@graphql-codegen/typescript'
+            - '@graphql-codegen/typescript-resolvers'
+        config:
+            contextType: '../types#Context'
+        hooks:
+            afterOneFileWrite:
+                - prettier --write

@@ -3,6 +3,7 @@ import { stitchSchemas } from '@graphql-tools/stitch';
 import { stitchingDirectives } from '@graphql-tools/stitching-directives';
 import { customDirectives, resolvers, typeDefs } from '@mealideas/database';
 import prismaClient from '@mealideas/database/src/prismaClient';
+import { Context } from '@mealideas/database/src/types';
 import { ApolloServer } from 'apollo-server';
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 import env from 'dotenv';
@@ -14,7 +15,6 @@ let mergedTypeDefs = stitchSchemas({
 		schema: makeExecutableSchema({ typeDefs: schemaItem })
 	})),
 	subschemaConfigTransforms: [stitchingDirectives().stitchingDirectivesTransformer],
-	// @ts-ignore the type is compatible
 	resolvers,
 	mergeDirectives: true
 });
@@ -33,7 +33,7 @@ const server = new ApolloServer({
 	},
 	context: ({ req, res }) => {
 		try {
-			return {
+			const context: Context = {
 				user: {
 					token: req.headers.cookie || ''
 				},
@@ -41,6 +41,8 @@ const server = new ApolloServer({
 				req,
 				res
 			};
+
+			return context;
 		} catch (error: any) {
 			return null;
 		}

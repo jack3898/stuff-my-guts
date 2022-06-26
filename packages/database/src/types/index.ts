@@ -5,7 +5,7 @@ export type Context = {
 	user: {
 		token: string;
 	};
-	client: PrismaClient,
+	client: PrismaClient;
 	req: ExpressContext['req'];
 	res: ExpressContext['res'];
 };
