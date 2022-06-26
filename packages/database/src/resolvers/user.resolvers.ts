@@ -67,7 +67,10 @@ export const userResolvers = {
 					{}
 				);
 
-				context.res.cookie('auth-token', token, { sameSite: 'none', secure: true });
+				context.res.cookie('auth-token', token, {
+					sameSite: 'none',
+					secure: true
+				});
 
 				return true;
 			}

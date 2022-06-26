@@ -32,10 +32,12 @@
 	"dependencies": {
 		"@graphql-tools/utils": "^8.6.13",
 		"@mealideas/paths": "*",
-		"@mealideas/validation": "^1.0.0",
+		"@mealideas/utils": "*",
+		"@mealideas/validation": "*",
 		"@prisma/client": "^3.15.1",
 		"apollo-server": "^3.8.2",
 		"bcrypt": "^5.0.1",
+		"cookie": "^0.5.0",
 		"dotenv": "^16.0.1",
 		"jsonwebtoken": "^8.5.1"
 	}

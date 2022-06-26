@@ -7,7 +7,7 @@
 		"dev": "ts-node app.serve.ts",
 		"build": "ts-node app.build.ts",
 		"generate-query-hooks": "graphql-codegen --config codegen.yml",
-		"//test": "jest",
+		"test": "jest --passWithNoTests",
 		"pre-commit": "ts-node pre-commit.ts"
 	},
 	"repository": {

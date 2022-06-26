@@ -18,8 +18,7 @@ let mergedTypeDefs = stitchSchemas({
 	mergeDirectives: true
 });
 
-mergedTypeDefs = customDirectives.authenticate(mergedTypeDefs, 'authenticate');
-mergedTypeDefs = customDirectives.upper(mergedTypeDefs, 'upper');
+mergedTypeDefs = customDirectives.auth().directiveTransformer(mergedTypeDefs, 'auth');
 
 const server = new ApolloServer({
 	schema: mergedTypeDefs,

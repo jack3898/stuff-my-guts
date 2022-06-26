@@ -1,9 +1,9 @@
 import { gql } from 'apollo-server';
 
 export const userTypeDefs = gql`
-	directive @authorise on FIELD_DEFINITION
+	directive @auth on OBJECT
 
-	type User {
+	type User @auth {
 		id: ID!
 		firstname: String!
 		lastname: String!
