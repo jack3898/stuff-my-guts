@@ -2,6 +2,7 @@ import { makeExecutableSchema } from '@graphql-tools/schema';
 import { stitchSchemas } from '@graphql-tools/stitch';
 import { stitchingDirectives } from '@graphql-tools/stitching-directives';
 import { customDirectives, resolvers, typeDefs } from '@mealideas/database';
+import prismaClient from '@mealideas/database/src/prismaClient';
 import { ApolloServer } from 'apollo-server';
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 import env from 'dotenv';
@@ -36,6 +37,7 @@ const server = new ApolloServer({
 				user: {
 					token: req.headers.cookie || ''
 				},
+				client: prismaClient,
 				req,
 				res
 			};

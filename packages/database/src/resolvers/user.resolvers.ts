@@ -41,8 +41,8 @@ export const userResolvers = {
 		}
 	},
 	Mutation: {
-		authenticate: async (root: unknown, input: AuthenticateInput, context: Context) => {
-			const user = await prisma.user.findFirst({ where: { email: input.email } });
+		authenticate: async (root: unknown, input: AuthenticateInput, { res, client }: Context) => {
+			const user = await client.user.findFirst({ where: { email: input.email } });
 			const validPassword = await bcrypt.compare(input.password, String(user?.password));
 
 			if (user && validPassword) {
@@ -63,7 +63,7 @@ export const userResolvers = {
 					{}
 				);
 
-				context.res.cookie('auth-token', token, {
+				res.cookie('auth-token', token, {
 					sameSite: 'none',
 					secure: true
 				});
@@ -73,7 +73,7 @@ export const userResolvers = {
 
 			throw new AuthenticationError('Invalid email and/or password!');
 		},
-		create: async (root: unknown, input: CreateInput) => {
+		create: async (root: unknown, input: CreateInput, { client }: Context) => {
 			const salt = await bcrypt.genSalt(11);
 			const hashedPassword = await bcrypt.hash(input.password, salt);
 
@@ -81,19 +81,19 @@ export const userResolvers = {
 
 			const { email, username, firstname, lastname } = input;
 
-			const createdUser = await prisma.user.create({
+			const createdUser = await client.user.create({
 				data: { email, firstname, lastname, password: hashedPassword, username }
 			});
 
 			return !!createdUser;
 		},
-		updateAccount: async (root: unknown, input: UpdateAccountInput) => {
+		updateAccount: async (root: unknown, input: UpdateAccountInput, { client }: Context) => {
 			const validJwt = jwt.verify(input.token, process.env.JWT_SECRET!) as {
 				id: number;
 				password: string;
 			};
 
-			const currentUser = await prisma.user.findFirst({
+			const currentUser = await client.user.findFirst({
 				select: { password: true, email: true },
 				where: { id: validJwt.id }
 			});
@@ -120,7 +120,7 @@ export const userResolvers = {
 					? await bcrypt.hash(newPassword, salt)
 					: currentUser.password;
 
-				await prisma.user.update({
+				await client.user.update({
 					where: {
 						id: validJwt.id
 					},

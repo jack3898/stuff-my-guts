@@ -1,4 +1,5 @@
 import { Prisma } from '@prisma/client';
+import prismaClient from '../prismaClient';
 import { userResolvers } from '../resolvers/user.resolvers';
 
 const users: Prisma.UserCreateArgs['data'][] = [
@@ -31,8 +32,7 @@ const users: Prisma.UserCreateArgs['data'][] = [
 
 export const usersSeeder = async () => {
 	const progress = users.map((user) => {
-		// @ts-ignore create does exist
-		return userResolvers.Mutation.create(null, user);
+		return userResolvers.Mutation.create(null, user, { client: prismaClient } as any);
 	});
 
 	await Promise.all(progress);
