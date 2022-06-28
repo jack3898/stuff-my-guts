@@ -3,8 +3,7 @@ const path = require('path');
 
 const config = {
 	overwrite: true,
-	schema: path.resolve(ROOT, 'packages', 'database', 'src', 'typedefs'),
-	documents: path.resolve(ROOT, 'packages', 'database', 'src', 'queries', '**', '*.graphql')
+	schema: path.resolve(ROOT, 'packages', 'database', 'src', 'typedefs')
 };
 
 const createConfig = (overrides) => Object.assign(config, overrides);

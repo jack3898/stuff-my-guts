@@ -11,23 +11,28 @@ datasource db {
 }
 
 model User {
-  id        Int     @id @default(autoincrement())
+  id        String   @id @default(uuid())
   firstname String
   lastname  String
-  username  String  @unique
-  email     String  @unique
+  username  String   @unique
+  email     String   @unique
   password  String
   tel       String?
   country   String?
   bio       String?
+  created   DateTime @default(now())
+  updated   DateTime @default(now())
   mealIds   Meal[]
 }
 
 model Meal {
-  id    Int    @id @default(autoincrement())
-  name  String @unique
-  about String
+  id      String   @id @default(uuid())
+  name    String   @unique
+  about   String
+  image   String?
+  created DateTime @default(now())
+  updated DateTime @default(now())
 
-  Owner   User @relation(fields: [ownerId], references: id)
-  ownerId Int
+  Owner   User   @relation(fields: [ownerId], references: id)
+  ownerId String
 }

@@ -1,4 +1,4 @@
-import { GraphQLResolveInfo } from 'graphql';
+import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
 import { Context } from '../types';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -13,14 +13,18 @@ export type Scalars = {
 	Boolean: boolean;
 	Int: number;
 	Float: number;
+	Date: any;
 };
 
 export type Meal = {
 	__typename?: 'Meal';
 	about: Scalars['String'];
+	created: Scalars['Date'];
 	id: Scalars['ID'];
+	image?: Maybe<Scalars['String']>;
 	name: Scalars['String'];
-	ownerId: Scalars['Int'];
+	ownerId: Scalars['ID'];
+	updated: Scalars['Date'];
 };
 
 export type Mutation = {
@@ -52,22 +56,33 @@ export type MutationUpdateAccountArgs = {
 
 export type Query = {
 	__typename?: 'Query';
+	current?: Maybe<User>;
 	meal?: Maybe<Meal>;
 	meals?: Maybe<Array<Maybe<Meal>>>;
 	user: User;
 	users: Array<User>;
 };
 
+export type QueryMealArgs = {
+	id: Scalars['ID'];
+};
+
+export type QueryMealsArgs = {
+	ownerId: Scalars['ID'];
+};
+
 export type User = {
 	__typename?: 'User';
 	bio?: Maybe<Scalars['String']>;
 	country?: Maybe<Scalars['String']>;
+	created: Scalars['Date'];
 	email: Scalars['String'];
 	firstname: Scalars['String'];
 	id: Scalars['ID'];
 	lastname: Scalars['String'];
-	mealIds?: Maybe<Array<Maybe<Scalars['Int']>>>;
+	mealIds?: Maybe<Array<Scalars['ID']>>;
 	tel?: Maybe<Scalars['String']>;
+	updated: Scalars['Date'];
 	username: Scalars['String'];
 };
 
@@ -156,8 +171,8 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
 	Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+	Date: ResolverTypeWrapper<Scalars['Date']>;
 	ID: ResolverTypeWrapper<Scalars['ID']>;
-	Int: ResolverTypeWrapper<Scalars['Int']>;
 	Meal: ResolverTypeWrapper<Meal>;
 	Mutation: ResolverTypeWrapper<{}>;
 	Query: ResolverTypeWrapper<{}>;
@@ -168,8 +183,8 @@ export type ResolversTypes = {
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
 	Boolean: Scalars['Boolean'];
+	Date: Scalars['Date'];
 	ID: Scalars['ID'];
-	Int: Scalars['Int'];
 	Meal: Meal;
 	Mutation: {};
 	Query: {};
@@ -186,14 +201,21 @@ export type AuthDirectiveResolver<
 	Args = AuthDirectiveArgs
 > = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
+export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Date'], any> {
+	name: 'Date';
+}
+
 export type MealResolvers<
 	ContextType = Context,
 	ParentType extends ResolversParentTypes['Meal'] = ResolversParentTypes['Meal']
 > = {
 	about?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+	created?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
 	id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+	image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
 	name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-	ownerId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+	ownerId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+	updated?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -228,8 +250,19 @@ export type QueryResolvers<
 	ContextType = Context,
 	ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']
 > = {
-	meal?: Resolver<Maybe<ResolversTypes['Meal']>, ParentType, ContextType>;
-	meals?: Resolver<Maybe<Array<Maybe<ResolversTypes['Meal']>>>, ParentType, ContextType>;
+	current?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+	meal?: Resolver<
+		Maybe<ResolversTypes['Meal']>,
+		ParentType,
+		ContextType,
+		RequireFields<QueryMealArgs, 'id'>
+	>;
+	meals?: Resolver<
+		Maybe<Array<Maybe<ResolversTypes['Meal']>>>,
+		ParentType,
+		ContextType,
+		RequireFields<QueryMealsArgs, 'ownerId'>
+	>;
 	user?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
 	users?: Resolver<Array<ResolversTypes['User']>, ParentType, ContextType>;
 };
@@ -240,17 +273,20 @@ export type UserResolvers<
 > = {
 	bio?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
 	country?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+	created?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
 	email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
 	firstname?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
 	id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
 	lastname?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-	mealIds?: Resolver<Maybe<Array<Maybe<ResolversTypes['Int']>>>, ParentType, ContextType>;
+	mealIds?: Resolver<Maybe<Array<ResolversTypes['ID']>>, ParentType, ContextType>;
 	tel?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+	updated?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
 	username?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = Context> = {
+	Date?: GraphQLScalarType;
 	Meal?: MealResolvers<ContextType>;
 	Mutation?: MutationResolvers<ContextType>;
 	Query?: QueryResolvers<ContextType>;

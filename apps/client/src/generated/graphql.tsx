@@ -13,14 +13,18 @@ export type Scalars = {
 	Boolean: boolean;
 	Int: number;
 	Float: number;
+	Date: any;
 };
 
 export type Meal = {
 	__typename?: 'Meal';
 	about: Scalars['String'];
+	created: Scalars['Date'];
 	id: Scalars['ID'];
+	image?: Maybe<Scalars['String']>;
 	name: Scalars['String'];
-	ownerId: Scalars['Int'];
+	ownerId: Scalars['ID'];
+	updated: Scalars['Date'];
 };
 
 export type Mutation = {
@@ -52,67 +56,60 @@ export type MutationUpdateAccountArgs = {
 
 export type Query = {
 	__typename?: 'Query';
+	current?: Maybe<User>;
 	meal?: Maybe<Meal>;
 	meals?: Maybe<Array<Maybe<Meal>>>;
 	user: User;
 	users: Array<User>;
 };
 
+export type QueryMealArgs = {
+	id: Scalars['ID'];
+};
+
+export type QueryMealsArgs = {
+	ownerId: Scalars['ID'];
+};
+
 export type User = {
 	__typename?: 'User';
 	bio?: Maybe<Scalars['String']>;
 	country?: Maybe<Scalars['String']>;
+	created: Scalars['Date'];
 	email: Scalars['String'];
 	firstname: Scalars['String'];
 	id: Scalars['ID'];
 	lastname: Scalars['String'];
-	mealIds?: Maybe<Array<Maybe<Scalars['Int']>>>;
+	mealIds?: Maybe<Array<Scalars['ID']>>;
 	tel?: Maybe<Scalars['String']>;
+	updated: Scalars['Date'];
 	username: Scalars['String'];
 };
 
-export type MealsQueryVariables = Exact<{ [key: string]: never }>;
+export type EditUserMutationVariables = Exact<{
+	currentPassword: Scalars['String'];
+	token: Scalars['String'];
+	newEmail?: InputMaybe<Scalars['String']>;
+	newPassword?: InputMaybe<Scalars['String']>;
+}>;
+
+export type EditUserMutation = { __typename?: 'Mutation'; updateAccount?: boolean | null };
+
+export type MealsQueryVariables = Exact<{
+	ownerId: Scalars['ID'];
+}>;
 
 export type MealsQuery = {
 	__typename?: 'Query';
-	meals?: Array<{ __typename?: 'Meal'; id: string; name: string; about: string } | null> | null;
-};
-
-export type MealQueryVariables = Exact<{ [key: string]: never }>;
-
-export type MealQuery = {
-	__typename?: 'Query';
-	meal?: { __typename?: 'Meal'; id: string; name: string; about: string } | null;
-};
-
-export type UsersQueryVariables = Exact<{ [key: string]: never }>;
-
-export type UsersQuery = {
-	__typename?: 'Query';
-	users: Array<{
-		__typename?: 'User';
+	meals?: Array<{
+		__typename?: 'Meal';
 		id: string;
-		firstname: string;
-		lastname: string;
-		bio?: string | null;
-		country?: string | null;
-		tel?: string | null;
-	}>;
-};
-
-export type UserQueryVariables = Exact<{ [key: string]: never }>;
-
-export type UserQuery = {
-	__typename?: 'Query';
-	user: {
-		__typename?: 'User';
-		id: string;
-		firstname: string;
-		lastname: string;
-		bio?: string | null;
-		country?: string | null;
-		tel?: string | null;
-	};
+		name: string;
+		about: string;
+		created: any;
+		updated: any;
+		ownerId: string;
+	} | null> | null;
 };
 
 export type AuthenticateMutationVariables = Exact<{
@@ -132,21 +129,70 @@ export type CreateUserMutationVariables = Exact<{
 
 export type CreateUserMutation = { __typename?: 'Mutation'; create?: boolean | null };
 
-export type EditUserMutationVariables = Exact<{
-	currentPassword: Scalars['String'];
-	token: Scalars['String'];
-	newEmail?: InputMaybe<Scalars['String']>;
-	newPassword?: InputMaybe<Scalars['String']>;
-}>;
+export const EditUserDocument = gql`
+	mutation EditUser(
+		$currentPassword: String!
+		$token: String!
+		$newEmail: String
+		$newPassword: String
+	) {
+		updateAccount(
+			currentPassword: $currentPassword
+			token: $token
+			newEmail: $newEmail
+			newPassword: $newPassword
+		)
+	}
+`;
+export type EditUserMutationFn = Apollo.MutationFunction<
+	EditUserMutation,
+	EditUserMutationVariables
+>;
 
-export type EditUserMutation = { __typename?: 'Mutation'; updateAccount?: boolean | null };
-
+/**
+ * __useEditUserMutation__
+ *
+ * To run a mutation, you first call `useEditUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useEditUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [editUserMutation, { data, loading, error }] = useEditUserMutation({
+ *   variables: {
+ *      currentPassword: // value for 'currentPassword'
+ *      token: // value for 'token'
+ *      newEmail: // value for 'newEmail'
+ *      newPassword: // value for 'newPassword'
+ *   },
+ * });
+ */
+export function useEditUserMutation(
+	baseOptions?: Apollo.MutationHookOptions<EditUserMutation, EditUserMutationVariables>
+) {
+	const options = { ...defaultOptions, ...baseOptions };
+	return Apollo.useMutation<EditUserMutation, EditUserMutationVariables>(
+		EditUserDocument,
+		options
+	);
+}
+export type EditUserMutationHookResult = ReturnType<typeof useEditUserMutation>;
+export type EditUserMutationResult = Apollo.MutationResult<EditUserMutation>;
+export type EditUserMutationOptions = Apollo.BaseMutationOptions<
+	EditUserMutation,
+	EditUserMutationVariables
+>;
 export const MealsDocument = gql`
-	query Meals {
-		meals {
+	query Meals($ownerId: ID!) {
+		meals(ownerId: $ownerId) {
 			id
 			name
 			about
+			created
+			updated
+			ownerId
 		}
 	}
 `;
@@ -163,11 +209,12 @@ export const MealsDocument = gql`
  * @example
  * const { data, loading, error } = useMealsQuery({
  *   variables: {
+ *      ownerId: // value for 'ownerId'
  *   },
  * });
  */
 export function useMealsQuery(
-	baseOptions?: Apollo.QueryHookOptions<MealsQuery, MealsQueryVariables>
+	baseOptions: Apollo.QueryHookOptions<MealsQuery, MealsQueryVariables>
 ) {
 	const options = { ...defaultOptions, ...baseOptions };
 	return Apollo.useQuery<MealsQuery, MealsQueryVariables>(MealsDocument, options);
@@ -181,128 +228,6 @@ export function useMealsLazyQuery(
 export type MealsQueryHookResult = ReturnType<typeof useMealsQuery>;
 export type MealsLazyQueryHookResult = ReturnType<typeof useMealsLazyQuery>;
 export type MealsQueryResult = Apollo.QueryResult<MealsQuery, MealsQueryVariables>;
-export const MealDocument = gql`
-	query Meal {
-		meal {
-			id
-			name
-			about
-		}
-	}
-`;
-
-/**
- * __useMealQuery__
- *
- * To run a query within a React component, call `useMealQuery` and pass it any options that fit your needs.
- * When your component renders, `useMealQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useMealQuery({
- *   variables: {
- *   },
- * });
- */
-export function useMealQuery(baseOptions?: Apollo.QueryHookOptions<MealQuery, MealQueryVariables>) {
-	const options = { ...defaultOptions, ...baseOptions };
-	return Apollo.useQuery<MealQuery, MealQueryVariables>(MealDocument, options);
-}
-export function useMealLazyQuery(
-	baseOptions?: Apollo.LazyQueryHookOptions<MealQuery, MealQueryVariables>
-) {
-	const options = { ...defaultOptions, ...baseOptions };
-	return Apollo.useLazyQuery<MealQuery, MealQueryVariables>(MealDocument, options);
-}
-export type MealQueryHookResult = ReturnType<typeof useMealQuery>;
-export type MealLazyQueryHookResult = ReturnType<typeof useMealLazyQuery>;
-export type MealQueryResult = Apollo.QueryResult<MealQuery, MealQueryVariables>;
-export const UsersDocument = gql`
-	query Users {
-		users {
-			id
-			firstname
-			lastname
-			bio
-			country
-			tel
-		}
-	}
-`;
-
-/**
- * __useUsersQuery__
- *
- * To run a query within a React component, call `useUsersQuery` and pass it any options that fit your needs.
- * When your component renders, `useUsersQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useUsersQuery({
- *   variables: {
- *   },
- * });
- */
-export function useUsersQuery(
-	baseOptions?: Apollo.QueryHookOptions<UsersQuery, UsersQueryVariables>
-) {
-	const options = { ...defaultOptions, ...baseOptions };
-	return Apollo.useQuery<UsersQuery, UsersQueryVariables>(UsersDocument, options);
-}
-export function useUsersLazyQuery(
-	baseOptions?: Apollo.LazyQueryHookOptions<UsersQuery, UsersQueryVariables>
-) {
-	const options = { ...defaultOptions, ...baseOptions };
-	return Apollo.useLazyQuery<UsersQuery, UsersQueryVariables>(UsersDocument, options);
-}
-export type UsersQueryHookResult = ReturnType<typeof useUsersQuery>;
-export type UsersLazyQueryHookResult = ReturnType<typeof useUsersLazyQuery>;
-export type UsersQueryResult = Apollo.QueryResult<UsersQuery, UsersQueryVariables>;
-export const UserDocument = gql`
-	query User {
-		user {
-			id
-			firstname
-			lastname
-			bio
-			country
-			tel
-		}
-	}
-`;
-
-/**
- * __useUserQuery__
- *
- * To run a query within a React component, call `useUserQuery` and pass it any options that fit your needs.
- * When your component renders, `useUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useUserQuery({
- *   variables: {
- *   },
- * });
- */
-export function useUserQuery(baseOptions?: Apollo.QueryHookOptions<UserQuery, UserQueryVariables>) {
-	const options = { ...defaultOptions, ...baseOptions };
-	return Apollo.useQuery<UserQuery, UserQueryVariables>(UserDocument, options);
-}
-export function useUserLazyQuery(
-	baseOptions?: Apollo.LazyQueryHookOptions<UserQuery, UserQueryVariables>
-) {
-	const options = { ...defaultOptions, ...baseOptions };
-	return Apollo.useLazyQuery<UserQuery, UserQueryVariables>(UserDocument, options);
-}
-export type UserQueryHookResult = ReturnType<typeof useUserQuery>;
-export type UserLazyQueryHookResult = ReturnType<typeof useUserLazyQuery>;
-export type UserQueryResult = Apollo.QueryResult<UserQuery, UserQueryVariables>;
 export const AuthenticateDocument = gql`
 	mutation Authenticate($email: String!, $password: String!) {
 		authenticate(email: $email, password: $password)
@@ -403,59 +328,4 @@ export type CreateUserMutationResult = Apollo.MutationResult<CreateUserMutation>
 export type CreateUserMutationOptions = Apollo.BaseMutationOptions<
 	CreateUserMutation,
 	CreateUserMutationVariables
->;
-export const EditUserDocument = gql`
-	mutation EditUser(
-		$currentPassword: String!
-		$token: String!
-		$newEmail: String
-		$newPassword: String
-	) {
-		updateAccount(
-			currentPassword: $currentPassword
-			token: $token
-			newEmail: $newEmail
-			newPassword: $newPassword
-		)
-	}
-`;
-export type EditUserMutationFn = Apollo.MutationFunction<
-	EditUserMutation,
-	EditUserMutationVariables
->;
-
-/**
- * __useEditUserMutation__
- *
- * To run a mutation, you first call `useEditUserMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useEditUserMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [editUserMutation, { data, loading, error }] = useEditUserMutation({
- *   variables: {
- *      currentPassword: // value for 'currentPassword'
- *      token: // value for 'token'
- *      newEmail: // value for 'newEmail'
- *      newPassword: // value for 'newPassword'
- *   },
- * });
- */
-export function useEditUserMutation(
-	baseOptions?: Apollo.MutationHookOptions<EditUserMutation, EditUserMutationVariables>
-) {
-	const options = { ...defaultOptions, ...baseOptions };
-	return Apollo.useMutation<EditUserMutation, EditUserMutationVariables>(
-		EditUserDocument,
-		options
-	);
-}
-export type EditUserMutationHookResult = ReturnType<typeof useEditUserMutation>;
-export type EditUserMutationResult = Apollo.MutationResult<EditUserMutation>;
-export type EditUserMutationOptions = Apollo.BaseMutationOptions<
-	EditUserMutation,
-	EditUserMutationVariables
 >;

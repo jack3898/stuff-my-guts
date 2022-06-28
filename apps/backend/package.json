@@ -7,7 +7,7 @@
 		"url": "git+https://github.com/jack3898/meal-ideas.git"
 	},
 	"scripts": {
-		"dev": "nodemon src/index.ts && prisma studio",
+		"dev": "nodemon src/index.ts",
 		"generate": "prisma generate",
 		"seed": "ts-node prisma/seed.ts",
 		"seed:init": "prisma db push --accept-data-loss --force-reset",

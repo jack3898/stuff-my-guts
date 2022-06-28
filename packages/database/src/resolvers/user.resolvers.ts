@@ -8,6 +8,22 @@ import { AuthenticationError } from 'apollo-server';
 import type { Resolvers } from '../generated/graphql';
 
 export const userResolvers: Resolvers = {
+	Query: {
+		current: async (root, input, { client, req }) => {
+			const userToken: string = req.cookies['auth-token'];
+			const { id } = decodeJwt<{ id: string }>(userToken);
+
+			const currentUser = await client.user.findFirst({
+				where: { id: id }
+			});
+
+			if (!currentUser) {
+				throw Error('User not found!');
+			}
+
+			return currentUser;
+		}
+	},
 	Mutation: {
 		authenticate: async (root, input, { res, client }) => {
 			const user = await client.user.findFirst({ where: { email: input.email } });
@@ -48,7 +64,7 @@ export const userResolvers: Resolvers = {
 			return !!createdUser;
 		},
 		updateAccount: async (root, input, { client }) => {
-			const validJwt = decodeJwt<{ id: number; password: string }>(input.token);
+			const validJwt = decodeJwt<{ id: string; password: string }>(input.token);
 
 			const currentUser = await client.user.findFirst({
 				select: { password: true, email: true },

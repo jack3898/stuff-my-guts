@@ -28,7 +28,9 @@ const client = {
 const cookieMock = jest.fn(() => {});
 
 describe('user resolver', () => {
-	afterEach(() => jest.clearAllMocks());
+	afterEach(() => {
+		jest.clearAllMocks();
+	});
 
 	it('should authenticate a user', async () => {
 		// @ts-ignore

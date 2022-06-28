@@ -1,6 +1,6 @@
 import randomNumber from './randomNumber';
 
-describe('Random number', () => {
+describe('random number utility', () => {
 	it('should generate a random number', () => {
 		expect(randomNumber(1, 3)).toBeGreaterThanOrEqual(1);
 		expect(randomNumber(1, 3)).toBeLessThanOrEqual(3);

@@ -1,4 +1,3 @@
-import { mealTypeDefs } from './meal.typedefs';
-import { userTypeDefs } from './user.typedefs';
+import { typeDefs } from './typedefs';
 
-export default [mealTypeDefs, userTypeDefs];
+export default [typeDefs];

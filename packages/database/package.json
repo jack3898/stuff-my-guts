@@ -4,6 +4,7 @@
 	"description": "Queries, schemas, resolvers and more.",
 	"main": "src/index.ts",
 	"scripts": {
+		"dev": "npx prisma studio --schema src/schema/schema.prisma",
 		"test": "jest --passWithNoTests",
 		"pre-commit": "ts-node pre-commit.ts",
 		"generate": "graphql-codegen"

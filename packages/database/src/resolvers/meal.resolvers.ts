@@ -1,12 +1,9 @@
-import prisma from '../prismaClient';
+import { Resolvers } from '../generated/graphql';
 
-export const mealResolvers = {
+export const mealResolvers: Resolvers = {
 	Query: {
-		meal: () => {
-			return prisma.meal.findFirst();
-		},
-		meals: () => {
-			return prisma.meal.findMany();
+		meals: (root, input, { client }) => {
+			return client.meal.findMany({ where: { ownerId: input.ownerId } });
 		}
 	}
 };

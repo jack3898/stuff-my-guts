@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 export type AuthData = {
 	tokenData: {
-		id: number | null;
+		id: string | null;
 		username: string | null;
 		firstname: string | null;
 		lastname: string | null;

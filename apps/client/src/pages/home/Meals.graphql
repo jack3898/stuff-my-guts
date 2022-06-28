@@ -1,0 +1,10 @@
+query Meals($ownerId: ID!) {
+	meals(ownerId: $ownerId) {
+		id
+		name
+		about
+		created
+		updated
+		ownerId
+	}
+}

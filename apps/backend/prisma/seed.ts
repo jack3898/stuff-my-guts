@@ -14,7 +14,7 @@ Promise.all(
 				if (!String(error).includes('Foreign key constraint failed')) throw error;
 
 				console.info(
-					'WARN: Forign key constraint problem. Retrying in 1 second... If this message persists for too long, there is a problem.'
+					'WARN: Foreign key constraint problem. Retrying in 1 second... If this message persists for too long, there is a problem.'
 				);
 
 				await new Promise((resolve) => setTimeout(() => resolve(true), 1000));

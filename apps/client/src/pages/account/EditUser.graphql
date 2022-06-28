@@ -1,0 +1,13 @@
+mutation EditUser(
+	$currentPassword: String!
+	$token: String!
+	$newEmail: String
+	$newPassword: String
+) {
+	updateAccount(
+		currentPassword: $currentPassword
+		token: $token
+		newEmail: $newEmail
+		newPassword: $newPassword
+	)
+}
