@@ -1,8 +1,8 @@
 import Main from '@smg/components/src/core-page/Main';
 import Rows from '@smg/components/src/core-page/Rows';
 import { useForceLogin } from '@smg/components/src/hooks/useAuth';
+import { useMealsQuery } from '@smg/graphql/codegen/client';
 import formatDate from '@smg/utils/src/shared/formatDate';
-import { useMealsQuery } from '../../generated/graphql';
 
 export default function Home() {
 	const { tokenData } = useForceLogin();

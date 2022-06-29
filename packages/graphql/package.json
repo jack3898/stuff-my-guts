@@ -1,0 +1,42 @@
+{
+	"name": "@smg/graphql",
+	"version": "1.0.0",
+	"description": "The home for the generated graphql code for React and the backend.",
+	"scripts": {
+		"generate": "graphql-codegen",
+		"pre-commit": "ts-node pre-commit.ts"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/jack3898/meal-ideas.git"
+	},
+	"author": "Jack Wright",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/jack3898/meal-ideas/issues"
+	},
+	"homepage": "https://github.com/jack3898/meal-ideas#readme",
+	"dependencies": {
+		"@apollo/client": "^3.6.9",
+		"@graphql-tools/schema": "^8.5.0",
+		"@graphql-tools/stitch": "^8.7.0",
+		"@graphql-tools/stitching-directives": "^2.3.0",
+		"@graphql-tools/utils": "^8.8.0",
+		"@smg/constants": "*",
+		"apollo-server": "^3.9.0",
+		"apollo-server-core": "^3.9.0",
+		"apollo-server-express": "^3.9.0",
+		"graphql": "^16.5.0"
+	},
+	"devDependencies": {
+		"@graphql-codegen/cli": "^2.6.3",
+		"@graphql-codegen/introspection": "^2.1.1",
+		"@graphql-codegen/typescript": "^2.5.1",
+		"@graphql-codegen/typescript-operations": "^2.4.2",
+		"@graphql-codegen/typescript-react-apollo": "^3.2.16",
+		"@graphql-codegen/typescript-resolvers": "^2.6.6",
+		"@prisma/client": "^4.0.0",
+		"@smg/config-tsconfig": "*",
+		"@smg/depcheck": "*"
+	}
+}

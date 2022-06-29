@@ -1,4 +1,4 @@
-import { AuthenticationError } from 'apollo-server';
+import { AuthenticationError } from '@smg/graphql/apollo/server';
 import { ValidationError } from 'yup';
 import { userResolvers } from './user.resolvers';
 

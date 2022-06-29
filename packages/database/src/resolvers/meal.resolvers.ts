@@ -1,4 +1,4 @@
-import { Resolvers } from '../generated/graphql';
+import { Resolvers } from '@smg/graphql/codegen/backend';
 
 export const mealResolvers: Resolvers = {
 	Query: {

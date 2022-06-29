@@ -23,8 +23,8 @@
 		"react-router-dom": "^6.3.0"
 	},
 	"devDependencies": {
-		"@smg/depcheck": "^1.0.0",
-		"@smg/config-jest": "^1.0.0",
+		"@smg/depcheck": "*",
+		"@smg/config-jest": "*",
 		"@smg/config-tsconfig": "*",
 		"@testing-library/dom": "^8.13.0",
 		"@testing-library/jest-dom": "^5.16.4",

@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server';
+import { gql } from '@smg/graphql/apollo/server';
 
 export const typeDefs = gql`
 	scalar Date

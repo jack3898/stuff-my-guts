@@ -1,9 +1,9 @@
-import { getDirective, MapperKind, mapSchema } from '@graphql-tools/utils';
+import { defaultFieldResolver, GraphQLFieldConfig, GraphQLSchema } from '@smg/graphql';
+import { AuthenticationError } from '@smg/graphql/apollo/server';
+import { getDirective, MapperKind, mapSchema } from '@smg/graphql/gql-tools/utils';
+import { Context } from '@smg/graphql/types';
 import { verifyJwt } from '@smg/utils/src/node/jwt';
-import { AuthenticationError } from 'apollo-server';
 import cookie from 'cookie';
-import { defaultFieldResolver, GraphQLFieldConfig, GraphQLSchema } from 'graphql';
-import { Context } from '../types';
 
 export default function authDirective() {
 	const typeDirectiveArgumentMaps = new Map<string, unknown>();

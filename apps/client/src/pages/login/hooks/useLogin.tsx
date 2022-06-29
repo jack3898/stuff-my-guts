@@ -1,8 +1,8 @@
 import { useAuthContext } from '@smg/components/src/hooks/useAuth';
+import { useAuthenticateMutation } from '@smg/graphql/codegen/client';
 import { authenticateUserValidation } from '@smg/validation/src/user.validation';
 import { useFormik } from 'formik';
 import { useState } from 'react';
-import { useAuthenticateMutation } from '../../../generated/graphql';
 
 export default function useLogin() {
 	const { tokenData } = useAuthContext();

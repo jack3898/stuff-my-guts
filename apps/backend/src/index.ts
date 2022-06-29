@@ -1,11 +1,11 @@
-import { makeExecutableSchema } from '@graphql-tools/schema';
-import { stitchSchemas } from '@graphql-tools/stitch';
-import { stitchingDirectives } from '@graphql-tools/stitching-directives';
 import { customDirectives, resolvers, typeDefs } from '@smg/database';
 import prismaClient from '@smg/database/src/prismaClient';
-import { Context } from '@smg/database/src/types';
-import { ApolloServer } from 'apollo-server';
-import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
+import { ApolloServer } from '@smg/graphql/apollo/server';
+import { ApolloServerPluginLandingPageLocalDefault } from '@smg/graphql/apollo/server-core';
+import { makeExecutableSchema } from '@smg/graphql/gql-tools/schema';
+import { stitchSchemas } from '@smg/graphql/gql-tools/stitch';
+import { stitchingDirectives } from '@smg/graphql/gql-tools/stitching-directives';
+import { Context } from '@smg/graphql/types';
 import env from 'dotenv';
 
 env.config();

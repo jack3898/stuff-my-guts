@@ -1,8 +1,8 @@
+import { AuthenticationError } from '@smg/graphql/apollo/server';
+import type { Resolvers } from '@smg/graphql/codegen/backend';
 import { createHash, verifyHash } from '@smg/utils/src/node/hash';
 import { decodeJwt, signJwt } from '@smg/utils/src/node/jwt';
 import { createUserValidation, updateUserValidation } from '@smg/validation/src/user.validation';
-import { AuthenticationError } from 'apollo-server';
-import type { Resolvers } from '../generated/graphql';
 
 export const userResolvers: Resolvers = {
 	Query: {

@@ -1,8 +1,8 @@
 import { useAuthContext } from '@smg/components/src/hooks/useAuth';
+import { useEditUserMutation } from '@smg/graphql/codegen/client';
 import { updateUserValidation } from '@smg/validation/src/user.validation';
 import { useFormik } from 'formik';
 import { useState } from 'react';
-import { useEditUserMutation } from '../../../generated/graphql';
 
 export default function useEditAccount() {
 	const { logout, tokenData, token } = useAuthContext();
