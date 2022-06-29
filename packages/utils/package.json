@@ -1,5 +1,5 @@
 {
-	"name": "@mealideas/utils",
+	"name": "@smg/utils",
 	"version": "1.0.0",
 	"description": "Utility functions for Node and browser environments.",
 	"scripts": {
@@ -16,11 +16,11 @@
 	},
 	"homepage": "https://github.com/jack3898/meal-ideas#readme",
 	"devDependencies": {
-		"@mealideas/tsconfig": "*",
+		"@smg/config-tsconfig": "*",
 		"jest": "^28.1.1"
 	},
 	"dependencies": {
-		"@mealideas/paths": "*",
+		"@smg/constants": "*",
 		"bcrypt": "^5.0.1",
 		"date-fns": "^2.28.0",
 		"dotenv": "^16.0.1",

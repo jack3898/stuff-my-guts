@@ -1,4 +1,4 @@
-import { ROOT } from '@mealideas/paths';
+import { ROOT } from '@smg/constants';
 import dotenv from 'dotenv';
 import path from 'path';
 

@@ -1,4 +1,4 @@
-import { prismaSeederClient, seedable } from '@mealideas/database';
+import { prismaSeederClient, seedable } from '@smg/database';
 
 Promise.all(
 	seedable.map(async (seed) => {

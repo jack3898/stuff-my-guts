@@ -1,10 +1,10 @@
 {
-	"name": "@mealideas/graphql-codegen",
+	"name": "@smg/config-graphql-codegen",
 	"version": "1.0.0",
 	"description": "Stores common graphql codegen config",
 	"main": "src/index.js",
 	"devDependencies": {
-		"@mealideas/paths": "*"
+		"@smg/constants": "*"
 	},
 	"repository": {
 		"type": "git",

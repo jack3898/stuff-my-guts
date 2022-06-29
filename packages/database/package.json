@@ -1,5 +1,5 @@
 {
-	"name": "@mealideas/database",
+	"name": "@smg/database",
 	"version": "1.0.0",
 	"description": "Queries, schemas, resolvers and more.",
 	"main": "src/index.ts",
@@ -22,10 +22,10 @@
 	"devDependencies": {
 		"@graphql-codegen/cli": "^2.6.2",
 		"@graphql-codegen/typescript-resolvers": "^2.6.6",
-		"@mealideas/depcheck": "*",
-		"@mealideas/graphql-codegen": "*",
-		"@mealideas/jest": "*",
-		"@mealideas/tsconfig": "*",
+		"@smg/depcheck": "*",
+		"@smg/config-graphql-codegen": "*",
+		"@smg/config-jest": "*",
+		"@smg/config-tsconfig": "*",
 		"@types/bcrypt": "^5.0.0",
 		"depcheck": "^1.4.3",
 		"jest": "^28.1.1",
@@ -36,9 +36,9 @@
 	},
 	"dependencies": {
 		"@graphql-tools/utils": "^8.6.13",
-		"@mealideas/paths": "*",
-		"@mealideas/utils": "*",
-		"@mealideas/validation": "*",
+		"@smg/constants": "*",
+		"@smg/utils": "*",
+		"@smg/validation": "*",
 		"@prisma/client": "^3.15.1",
 		"apollo-server": "^3.8.2",
 		"cookie": "^0.5.0"

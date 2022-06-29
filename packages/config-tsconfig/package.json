@@ -1,5 +1,5 @@
 {
-	"name": "@mealideas/tsconfig",
+	"name": "@smg/config-tsconfig",
 	"version": "1.0.0",
 	"description": "Base tsconfigs.",
 	"repository": {

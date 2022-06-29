@@ -1,6 +1,6 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 const path = require('path');
-const { ROOT } = require('@mealideas/paths');
+const { ROOT } = require('@smg/constants');
 const colors = require('tailwindcss/colors');
 
 const locations = ['apps/client', 'packages/components'];

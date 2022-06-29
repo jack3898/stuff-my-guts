@@ -1,5 +1,5 @@
 {
-	"name": "@mealideas/components",
+	"name": "@smg/components",
 	"version": "1.0.0",
 	"description": "React components for the app.",
 	"main": "src/index.ts",
@@ -23,9 +23,9 @@
 		"react-router-dom": "^6.3.0"
 	},
 	"devDependencies": {
-		"@mealideas/depcheck": "^1.0.0",
-		"@mealideas/jest": "^1.0.0",
-		"@mealideas/tsconfig": "*",
+		"@smg/depcheck": "^1.0.0",
+		"@smg/config-jest": "^1.0.0",
+		"@smg/config-tsconfig": "*",
 		"@testing-library/dom": "^8.13.0",
 		"@testing-library/jest-dom": "^5.16.4",
 		"@testing-library/react": "^13.3.0",

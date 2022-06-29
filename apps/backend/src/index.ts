@@ -1,9 +1,9 @@
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import { stitchSchemas } from '@graphql-tools/stitch';
 import { stitchingDirectives } from '@graphql-tools/stitching-directives';
-import { customDirectives, resolvers, typeDefs } from '@mealideas/database';
-import prismaClient from '@mealideas/database/src/prismaClient';
-import { Context } from '@mealideas/database/src/types';
+import { customDirectives, resolvers, typeDefs } from '@smg/database';
+import prismaClient from '@smg/database/src/prismaClient';
+import { Context } from '@smg/database/src/types';
 import { ApolloServer } from 'apollo-server';
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 import env from 'dotenv';

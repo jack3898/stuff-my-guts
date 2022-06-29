@@ -1,5 +1,5 @@
 {
-	"name": "@mealideas/jest",
+	"name": "@smg/config-jest",
 	"version": "1.0.0",
 	"description": "Jest config package.",
 	"repository": {

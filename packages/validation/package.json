@@ -1,5 +1,5 @@
 {
-	"name": "@mealideas/validation",
+	"name": "@smg/validation",
 	"version": "1.0.0",
 	"description": "Validation schemas that are shared between the client and server.",
 	"repository": {

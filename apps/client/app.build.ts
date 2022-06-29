@@ -1,3 +1,3 @@
-import { bundler } from '@mealideas/webpack';
+import { bundler } from '@smg/config-webpack';
 
 bundler().run(console.log);

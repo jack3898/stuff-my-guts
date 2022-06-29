@@ -1,5 +1,5 @@
 import { getDirective, MapperKind, mapSchema } from '@graphql-tools/utils';
-import { verifyJwt } from '@mealideas/utils/src/node/jwt';
+import { verifyJwt } from '@smg/utils/src/node/jwt';
 import { AuthenticationError } from 'apollo-server';
 import cookie from 'cookie';
 import { defaultFieldResolver, GraphQLFieldConfig, GraphQLSchema } from 'graphql';

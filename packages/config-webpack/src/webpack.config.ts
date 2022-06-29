@@ -1,5 +1,5 @@
-import { ROOT } from '@mealideas/paths';
-import rootenv from '@mealideas/utils/src/node/env';
+import { ROOT } from '@smg/constants';
+import rootenv from '@smg/utils/src/node/env';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import path from 'path';
 import { Configuration as WebpackConfig } from 'webpack';

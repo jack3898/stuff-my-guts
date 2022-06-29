@@ -1,9 +1,6 @@
-import { createHash, verifyHash } from '@mealideas/utils/src/node/hash';
-import { decodeJwt, signJwt } from '@mealideas/utils/src/node/jwt';
-import {
-	createUserValidation,
-	updateUserValidation
-} from '@mealideas/validation/src/user.validation';
+import { createHash, verifyHash } from '@smg/utils/src/node/hash';
+import { decodeJwt, signJwt } from '@smg/utils/src/node/jwt';
+import { createUserValidation, updateUserValidation } from '@smg/validation/src/user.validation';
 import { AuthenticationError } from 'apollo-server';
 import type { Resolvers } from '../generated/graphql';
 

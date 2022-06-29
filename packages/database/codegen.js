@@ -1,4 +1,4 @@
-const createConfig = require('@mealideas/graphql-codegen');
+const createConfig = require('@smg/config-graphql-codegen');
 
 module.exports = createConfig({
 	generates: {

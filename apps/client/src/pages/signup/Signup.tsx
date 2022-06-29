@@ -1,5 +1,5 @@
-import Main from '@mealideas/components/src/core-page/Main';
-import Rows from '@mealideas/components/src/core-page/Rows';
+import Main from '@smg/components/src/core-page/Main';
+import Rows from '@smg/components/src/core-page/Rows';
 import { Link } from 'react-router-dom';
 import SignupForm from './components/SignupForm';
 

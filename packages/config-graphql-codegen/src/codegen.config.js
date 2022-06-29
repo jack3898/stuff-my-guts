@@ -1,4 +1,4 @@
-const { ROOT } = require('@mealideas/paths');
+const { ROOT } = require('@smg/constants');
 const path = require('path');
 
 const config = {

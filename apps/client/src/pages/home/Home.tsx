@@ -1,7 +1,7 @@
-import Main from '@mealideas/components/src/core-page/Main';
-import Rows from '@mealideas/components/src/core-page/Rows';
-import { useForceLogin } from '@mealideas/components/src/hooks/useAuth';
-import formatDate from '@mealideas/utils/src/shared/formatDate';
+import Main from '@smg/components/src/core-page/Main';
+import Rows from '@smg/components/src/core-page/Rows';
+import { useForceLogin } from '@smg/components/src/hooks/useAuth';
+import formatDate from '@smg/utils/src/shared/formatDate';
 import { useMealsQuery } from '../../generated/graphql';
 
 export default function Home() {

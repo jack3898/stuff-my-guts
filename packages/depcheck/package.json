@@ -1,5 +1,5 @@
 {
-	"name": "@mealideas/depcheck",
+	"name": "@smg/depcheck",
 	"version": "1.0.0",
 	"description": "Check configuration and utilities.",
 	"main": "src/index.ts",

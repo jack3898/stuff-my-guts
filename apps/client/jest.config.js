@@ -1,4 +1,4 @@
-const react = require('@mealideas/jest/src/jest.config.react');
+const react = require('@smg/config-jest/src/jest.config.react');
 
 /** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
 const override = {

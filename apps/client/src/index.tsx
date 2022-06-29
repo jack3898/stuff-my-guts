@@ -1,6 +1,6 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
-import Header from '@mealideas/components/src/core-page/Header';
-import { AuthContextProvider } from '@mealideas/components/src/hooks/useAuth';
+import Header from '@smg/components/src/core-page/Header';
+import { AuthContextProvider } from '@smg/components/src/hooks/useAuth';
 import { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';

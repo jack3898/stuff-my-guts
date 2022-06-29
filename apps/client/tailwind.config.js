@@ -1,3 +1,3 @@
-const { base } = require('@mealideas/tailwind');
+const { base } = require('@smg/config-tailwind');
 
 module.exports = base;

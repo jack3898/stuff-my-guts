@@ -1,5 +1,5 @@
-import { useAuthContext } from '@mealideas/components/src/hooks/useAuth';
-import { authenticateUserValidation } from '@mealideas/validation/src/user.validation';
+import { useAuthContext } from '@smg/components/src/hooks/useAuth';
+import { authenticateUserValidation } from '@smg/validation/src/user.validation';
 import { useFormik } from 'formik';
 import { useState } from 'react';
 import { useAuthenticateMutation } from '../../../generated/graphql';

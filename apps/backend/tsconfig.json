@@ -1,5 +1,5 @@
 {
-	"extends": "@mealideas/tsconfig/tsconfig.base.json",
+	"extends": "@smg/config-tsconfig/tsconfig.base.json",
 	"compilerOptions": {
 		"outDir": "dist",
 		"lib": ["esnext"]

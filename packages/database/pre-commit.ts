@@ -1,4 +1,4 @@
-import depcheckConfig from '@mealideas/depcheck';
+import depcheckConfig from '@smg/depcheck';
 import depcheck from 'depcheck';
 import packageJson from './package.json';
 

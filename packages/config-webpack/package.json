@@ -1,5 +1,5 @@
 {
-	"name": "@mealideas/webpack",
+	"name": "@smg/config-webpack",
 	"version": "1.0.0",
 	"description": "Webpack configuration.",
 	"main": "src/index.ts",
@@ -14,9 +14,9 @@
 	},
 	"homepage": "https://github.com/jack3898/meal-ideas#readme",
 	"devDependencies": {
-		"@mealideas/paths": "*",
-		"@mealideas/tsconfig": "*",
-		"@mealideas/utils": "*",
+		"@smg/constants": "*",
+		"@smg/config-tsconfig": "*",
+		"@smg/utils": "*",
 		"autoprefixer": "^10.4.7",
 		"css-loader": "^6.7.1",
 		"dotenv": "^16.0.1",
