@@ -10,7 +10,7 @@ export default function Account() {
 		<Main>
 			<Rows>
 				<section>
-					<h1>Account</h1>
+					<h1>Your Account</h1>
 					<p>You can review and edit your account details below.</p>
 				</section>
 				<section>

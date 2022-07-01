@@ -8,7 +8,7 @@ type HeaderProps = {
 
 export default function Header({ title, tagline }: HeaderProps) {
 	const navigate = useNavigate();
-	const { token, logout, tokenData } = useAuthContext();
+	const { token, logout } = useAuthContext();
 
 	return (
 		<>
@@ -19,7 +19,7 @@ export default function Header({ title, tagline }: HeaderProps) {
 				{token && (
 					<>
 						<button className="btn-primary" onClick={() => navigate('/')} role="link">
-							{tokenData.firstname}'s page
+							Your page
 						</button>
 						<button
 							className="btn-primary"

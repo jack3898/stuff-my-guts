@@ -1,5 +1,5 @@
 const path = require('path');
 
-module.exports = {
-	ROOT: path.resolve(__dirname, '..', '..', '..')
-};
+module.exports = new (function () {
+	this.ROOT = path.resolve(__dirname, '..', '..', '..');
+})();

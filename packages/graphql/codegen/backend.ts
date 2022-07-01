@@ -56,7 +56,7 @@ export type MutationUpdateAccountArgs = {
 
 export type Query = {
 	__typename?: 'Query';
-	current?: Maybe<User>;
+	loggedInUser?: Maybe<User>;
 	meal?: Maybe<Meal>;
 	meals?: Maybe<Array<Maybe<Meal>>>;
 	user: User;
@@ -250,7 +250,7 @@ export type QueryResolvers<
 	ContextType = Context,
 	ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']
 > = {
-	current?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+	loggedInUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
 	meal?: Resolver<
 		Maybe<ResolversTypes['Meal']>,
 		ParentType,

@@ -1,19 +1,21 @@
 import { useAuthContext } from '@smg/components/src/hooks/useAuth';
-import { useEditUserMutation } from '@smg/graphql/codegen/client';
+import { useEditUserMutation, useLoggedInUserQuery } from '@smg/graphql/codegen/client';
 import { updateUserValidation } from '@smg/validation/src/user.validation';
 import { useFormik } from 'formik';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function useEditAccount() {
-	const { logout, tokenData, token } = useAuthContext();
+	const { logout, token } = useAuthContext();
+	const loggedInUserQuery = useLoggedInUserQuery();
+	const loggedInUser = loggedInUserQuery.data?.loggedInUser;
 	const [error, setError] = useState<Error | null>(null);
 	const [editUser] = useEditUserMutation();
 
 	const formik = useFormik({
 		validationSchema: updateUserValidation,
 		initialValues: {
-			username: tokenData.username,
-			newEmail: tokenData.email,
+			username: '',
+			newEmail: '',
 			newPassword: '',
 			currentPassword: ''
 		},
@@ -37,6 +39,18 @@ export default function useEditAccount() {
 				});
 		}
 	});
+
+	// Pre-fill current details when user has been found
+	useEffect(() => {
+		if (!loggedInUser?.username || !loggedInUser?.email) return;
+
+		formik.setValues({
+			newEmail: loggedInUser.email,
+			username: loggedInUser.username,
+			newPassword: '',
+			currentPassword: ''
+		});
+	}, [loggedInUser?.email, loggedInUser?.username]);
 
 	return { formik, authError: error };
 }

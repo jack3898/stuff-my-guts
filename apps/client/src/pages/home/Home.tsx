@@ -1,21 +1,23 @@
 import Main from '@smg/components/src/core-page/Main';
 import Rows from '@smg/components/src/core-page/Rows';
-import { useForceLogin } from '@smg/components/src/hooks/useAuth';
-import { useMealsQuery } from '@smg/graphql/codegen/client';
+import { useLoggedInUserQuery, useMealsLazyQuery } from '@smg/graphql/codegen/client';
 import formatDate from '@smg/utils/src/shared/formatDate';
+import { useEffect } from 'react';
 
 export default function Home() {
-	const { tokenData } = useForceLogin();
-	const { data } = useMealsQuery({ variables: { ownerId: tokenData.id! } });
+	const loggedInUserQuery = useLoggedInUserQuery();
+	const loggedInUser = loggedInUserQuery.data?.loggedInUser;
+	const [getMeals, { data }] = useMealsLazyQuery();
+
+	useEffect(() => {
+		if (loggedInUser?.id) getMeals({ variables: { ownerId: loggedInUser.id } });
+	}, [loggedInUser?.id]);
 
 	return (
 		<Main>
 			<Rows>
 				<section>
-					<h1>Home!</h1>
-					<p>
-						Hey, {tokenData.firstname} {tokenData.lastname}!
-					</p>
+					<h1>Hey {loggedInUser?.firstname}!</h1>
 				</section>
 				<section>
 					<h2>Your meals 🍝</h2>

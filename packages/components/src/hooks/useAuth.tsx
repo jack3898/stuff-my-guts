@@ -4,16 +4,7 @@ import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 
 export type AuthData = {
-	tokenData: {
-		id: string | null;
-		username: string | null;
-		firstname: string | null;
-		lastname: string | null;
-		email: string | null;
-		bio: string | null;
-		country: string | null;
-		tel: string | null;
-	};
+	tokenData: { id: string | null };
 	token: string | null;
 	loginRoute: string;
 	logout: () => void;
@@ -28,16 +19,7 @@ export type AuthContextProviderProps = {
 
 const AuthContext = createContext({
 	token: null,
-	tokenData: {
-		id: null,
-		username: null,
-		email: null,
-		firstname: null,
-		lastname: null,
-		tel: null,
-		bio: null,
-		country: null
-	},
+	tokenData: { id: null },
 	loginRoute: '/',
 	logout: () => {}
 } as AuthData);
@@ -63,16 +45,7 @@ export function AuthContextProvider({ children, directTo }: AuthContextProviderP
 
 	const providerValue: AuthData = {
 		token: authToken,
-		tokenData: {
-			id: jwtData?.id || null,
-			username: jwtData?.username || null,
-			email: jwtData?.email || null,
-			firstname: jwtData?.firstname || null,
-			lastname: jwtData?.lastname || null,
-			bio: jwtData?.bio || null,
-			country: jwtData?.country || null,
-			tel: jwtData?.tel || null
-		},
+		tokenData: { id: jwtData?.id || null },
 		loginRoute: directTo,
 		logout
 	};

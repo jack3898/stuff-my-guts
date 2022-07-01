@@ -23,8 +23,7 @@
 		"@smg/constants": "*",
 		"@smg/graphql": "*",
 		"@smg/utils": "*",
-		"@smg/validation": "*",
-		"cookie": "^0.5.0"
+		"@smg/validation": "*"
 	},
 	"devDependencies": {
 		"@smg/config-jest": "*",

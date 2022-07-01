@@ -3,11 +3,12 @@ import { gql } from '@smg/graphql/apollo/server';
 export const typeDefs = gql`
 	scalar Date
 	directive @auth on OBJECT
+	directive @auth on FIELD_DEFINITION
 
 	type Query {
 		users: [User!]!
-		user: User!
-		current: User
+		user: User! @auth
+		loggedInUser: User @auth
 		meal(id: ID!): Meal
 		meals(ownerId: ID!): [Meal]
 	}
@@ -29,7 +30,7 @@ export const typeDefs = gql`
 		): Boolean
 	}
 
-	type User @auth {
+	type User {
 		id: ID!
 		firstname: String!
 		lastname: String!

@@ -56,7 +56,7 @@ export type MutationUpdateAccountArgs = {
 
 export type Query = {
 	__typename?: 'Query';
-	current?: Maybe<User>;
+	loggedInUser?: Maybe<User>;
 	meal?: Maybe<Meal>;
 	meals?: Maybe<Array<Maybe<Meal>>>;
 	user: User;
@@ -128,6 +128,25 @@ export type CreateUserMutationVariables = Exact<{
 }>;
 
 export type CreateUserMutation = { __typename?: 'Mutation'; create?: boolean | null };
+
+export type LoggedInUserQueryVariables = Exact<{ [key: string]: never }>;
+
+export type LoggedInUserQuery = {
+	__typename?: 'Query';
+	loggedInUser?: {
+		__typename?: 'User';
+		id: string;
+		username: string;
+		email: string;
+		firstname: string;
+		lastname: string;
+		created: any;
+		updated: any;
+		bio?: string | null;
+		country?: string | null;
+		tel?: string | null;
+	} | null;
+};
 
 export const EditUserDocument = gql`
 	mutation EditUser(
@@ -328,4 +347,60 @@ export type CreateUserMutationResult = Apollo.MutationResult<CreateUserMutation>
 export type CreateUserMutationOptions = Apollo.BaseMutationOptions<
 	CreateUserMutation,
 	CreateUserMutationVariables
+>;
+export const LoggedInUserDocument = gql`
+	query LoggedInUser {
+		loggedInUser {
+			id
+			username
+			email
+			firstname
+			lastname
+			created
+			updated
+			bio
+			country
+			tel
+		}
+	}
+`;
+
+/**
+ * __useLoggedInUserQuery__
+ *
+ * To run a query within a React component, call `useLoggedInUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLoggedInUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLoggedInUserQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useLoggedInUserQuery(
+	baseOptions?: Apollo.QueryHookOptions<LoggedInUserQuery, LoggedInUserQueryVariables>
+) {
+	const options = { ...defaultOptions, ...baseOptions };
+	return Apollo.useQuery<LoggedInUserQuery, LoggedInUserQueryVariables>(
+		LoggedInUserDocument,
+		options
+	);
+}
+export function useLoggedInUserLazyQuery(
+	baseOptions?: Apollo.LazyQueryHookOptions<LoggedInUserQuery, LoggedInUserQueryVariables>
+) {
+	const options = { ...defaultOptions, ...baseOptions };
+	return Apollo.useLazyQuery<LoggedInUserQuery, LoggedInUserQueryVariables>(
+		LoggedInUserDocument,
+		options
+	);
+}
+export type LoggedInUserQueryHookResult = ReturnType<typeof useLoggedInUserQuery>;
+export type LoggedInUserLazyQueryHookResult = ReturnType<typeof useLoggedInUserLazyQuery>;
+export type LoggedInUserQueryResult = Apollo.QueryResult<
+	LoggedInUserQuery,
+	LoggedInUserQueryVariables
 >;

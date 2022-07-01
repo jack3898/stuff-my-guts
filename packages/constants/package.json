@@ -3,6 +3,9 @@
 	"version": "1.0.0",
 	"description": "Core constants for the project.",
 	"main": "src/index.js",
+	"scripts": {
+		"test": "jest"
+	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/jack3898/meal-ideas.git"
@@ -14,6 +17,7 @@
 	},
 	"homepage": "https://github.com/jack3898/meal-ideas#readme",
 	"devDependencies": {
-		"@smg/config-tsconfig": "*"
+		"@smg/config-tsconfig": "*",
+		"jest": "^28.1.2"
 	}
 }

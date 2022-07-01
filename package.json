@@ -1,5 +1,5 @@
 {
-	"name": "meal-ideas",
+	"name": "stuff-my-guts",
 	"version": "1.0.0",
 	"description": "A simple app that intelligently chooses your meals for you from your input.",
 	"main": "index.js",

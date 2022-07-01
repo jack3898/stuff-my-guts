@@ -3,7 +3,6 @@ import { AuthenticationError } from '@smg/graphql/apollo/server';
 import { getDirective, MapperKind, mapSchema } from '@smg/graphql/gql-tools/utils';
 import { Context } from '@smg/graphql/types';
 import { verifyJwt } from '@smg/utils/src/node/jwt';
-import cookie from 'cookie';
 
 export default function authDirective() {
 	const typeDirectiveArgumentMaps = new Map<string, unknown>();
@@ -44,9 +43,8 @@ function modifyCurrentFieldWithAuthMiddleware(fieldConfig: GraphQLFieldConfig<an
 
 	fieldConfig.resolve = async function (source, args, context: Context, info) {
 		const result = await resolve(source, args, context, info);
-		const token = cookie.parse(context.user.token)['auth-token'];
 
-		if (verifyJwt(token)) {
+		if (verifyJwt(context.user.token || '')) {
 			return result;
 		}
 

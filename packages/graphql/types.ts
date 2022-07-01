@@ -3,7 +3,7 @@ import { ExpressContext } from 'apollo-server-express';
 
 export type Context = {
 	user: {
-		token: string;
+		token?: string;
 	};
 	client: PrismaClient;
 	req: ExpressContext['req'];

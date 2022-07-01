@@ -6,6 +6,7 @@ import { makeExecutableSchema } from '@smg/graphql/gql-tools/schema';
 import { stitchSchemas } from '@smg/graphql/gql-tools/stitch';
 import { stitchingDirectives } from '@smg/graphql/gql-tools/stitching-directives';
 import { Context } from '@smg/graphql/types';
+import cookie from 'cookie';
 import env from 'dotenv';
 
 env.config();
@@ -32,10 +33,10 @@ const server = new ApolloServer({
 	},
 	context: ({ req, res }) => {
 		try {
+			const token = cookie.parse(req.headers.cookie || '')['auth-token'];
+
 			const context: Context = {
-				user: {
-					token: req.headers.cookie || ''
-				},
+				user: { token },
 				client: prismaClient,
 				req,
 				res
