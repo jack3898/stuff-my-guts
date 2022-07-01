@@ -11,7 +11,7 @@ module.exports = {
 			hooks: { afterOneFileWrite: ['prettier --write'] }
 		},
 		'codegen/client.ts': {
-			documents: path.resolve(ROOT, 'apps', 'client', 'src', '**', '*.graphql'),
+			documents: path.resolve(ROOT, 'apps', 'client', 'src', 'queries', '*.graphql'),
 			plugins: ['typescript', 'typescript-operations', 'typescript-react-apollo'],
 			config: { withHooks: true },
 			hooks: { afterOneFileWrite: ['prettier --write'] }

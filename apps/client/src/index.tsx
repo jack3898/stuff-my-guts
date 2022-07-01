@@ -1,4 +1,5 @@
 import Header from '@smg/components/src/core-page/Header';
+import { Protect } from '@smg/components/src/core-page/Protect';
 import { AuthContextProvider } from '@smg/components/src/hooks/useAuth';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@smg/graphql/apollo/client';
 import { lazy, Suspense } from 'react';
@@ -25,19 +26,19 @@ function App() {
 					<BrowserRouter>
 						<Header title="Stuff My Guts" tagline="Inspiring your next meal" />
 						<Routes>
-							<Route path="*" element={<Home />} />
-							<Route path="/" element={<Home />} />
-							<Route path="login" element={<Login />} />
-							<Route path="signup" element={<Signup />} />
-							<Route path="account" element={<Account />} />
-							<Route
-								path="planner"
-								element={<p className="text-center">Coming soon!</p>}
-							/>
-							<Route
-								path="create"
-								element={<p className="text-center">Coming soon!</p>}
-							/>
+							{/* Base protected routes */}
+							<Route element={<Protect to="/login" />}>
+								<Route path="/" element={<Home />} />
+								<Route path="account" element={<Account />} />
+								<Route path="planner" />
+								<Route path="create" />
+							</Route>
+
+							{/* Base un-protected routes */}
+							<Route element={<Protect to="/" invert={true} />}>
+								<Route path="login" element={<Login />} />
+								<Route path="signup" element={<Signup />} />
+							</Route>
 						</Routes>
 					</BrowserRouter>
 				</AuthContextProvider>

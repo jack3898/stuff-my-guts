@@ -22,6 +22,7 @@
 		"@graphql-tools/stitch": "^8.7.0",
 		"@graphql-tools/stitching-directives": "^2.3.0",
 		"@graphql-tools/utils": "^8.8.0",
+		"@smg/components": "*",
 		"@smg/constants": "*",
 		"apollo-server": "^3.9.0",
 		"apollo-server-core": "^3.9.0",

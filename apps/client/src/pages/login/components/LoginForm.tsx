@@ -1,10 +1,18 @@
-import useLogin from '../hooks/useLogin';
+import { useAuthContext } from '@smg/components/src/hooks/useAuth';
+import { authenticateUserValidation } from '@smg/validation/src/user.validation';
+import { useFormik } from 'formik';
 
 export default function LoginForm() {
-	const {
-		formik: { getFieldProps, handleSubmit, errors },
-		authError
-	} = useLogin();
+	const { login, error } = useAuthContext();
+
+	const { getFieldProps, handleSubmit, errors } = useFormik({
+		validationSchema: authenticateUserValidation,
+		initialValues: {
+			email: '',
+			password: ''
+		},
+		onSubmit: login
+	});
 
 	return (
 		<>
@@ -23,7 +31,7 @@ export default function LoginForm() {
 					</button>
 				</div>
 			</form>
-			{authError && <section>{String(authError)}</section>}
+			{error && <section>{String(error)}</section>}
 		</>
 	);
 }
