@@ -1,18 +1,9 @@
 import Main from '@smg/components/src/core-page/Main';
 import Rows from '@smg/components/src/core-page/Rows';
-import { useAuthContext } from '@smg/components/src/hooks/useAuth';
-import { useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import LoginForm from './components/LoginForm';
 
 export default function Login() {
-	const { token } = useAuthContext();
-	const navigate = useNavigate();
-
-	useEffect(() => {
-		if (token) navigate('/');
-	}, [token]);
-
 	return (
 		<Main>
 			<Rows>
