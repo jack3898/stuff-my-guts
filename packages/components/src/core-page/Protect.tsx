@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuth';
 
-type ProtectProps = {
+export type ProtectProps = {
 	/**
 	 * Apply a redirection to a certain page when not authenticated.
 	 */

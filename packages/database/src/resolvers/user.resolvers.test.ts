@@ -40,7 +40,7 @@ describe('user resolver', () => {
 				email: 'email',
 				password: 'password123'
 			},
-			{ res: { cookie: cookieMock }, client } as any
+			{ res: { cookie: cookieMock }, client }
 		);
 
 		expect(cookieMock).toBeCalledWith(
