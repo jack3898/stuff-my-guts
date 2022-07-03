@@ -2,8 +2,13 @@ import { Resolvers } from '@smg/graphql/codegen/backend';
 
 export const mealResolvers: Resolvers = {
 	Query: {
-		meals: (root, input, { client }) => {
-			return client.meal.findMany({ where: { ownerId: input.ownerId } });
+		// @ts-ignore
+		meals: (root, input, { client, paginateFindMany }) => {
+			return paginateFindMany(
+				client.meal,
+				{ where: { ownerId: input.ownerId } },
+				{ first: input.first, after: input.after }
+			);
 		}
 	}
 };

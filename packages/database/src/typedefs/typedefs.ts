@@ -5,12 +5,14 @@ export const typeDefs = gql`
 	directive @auth on OBJECT
 	directive @auth on FIELD_DEFINITION
 
+	# ROOT
+
 	type Query {
 		users: [User!]!
 		user: User! @auth
 		loggedInUser: User @auth
 		meal(id: ID!): Meal
-		meals(ownerId: ID!): [Meal]
+		meals(ownerId: ID!, first: Int, after: String): MealEdges
 	}
 
 	type Mutation {
@@ -30,6 +32,17 @@ export const typeDefs = gql`
 		): Boolean
 	}
 
+	# PAGINATION
+
+	type PageInfo {
+		startCursor: String
+		endCursor: String
+		hasNextPage: Boolean
+		hasPreviousPage: Boolean
+	}
+
+	# TYPES
+
 	type User {
 		id: ID!
 		firstname: String!
@@ -42,6 +55,16 @@ export const typeDefs = gql`
 		created: Date!
 		updated: Date!
 		mealIds: [ID!]
+	}
+
+	type MealEdge {
+		cursor: String
+		node: Meal
+	}
+
+	type MealEdges @auth {
+		edges: [MealEdge]
+		pageInfo: PageInfo!
 	}
 
 	type Meal @auth {

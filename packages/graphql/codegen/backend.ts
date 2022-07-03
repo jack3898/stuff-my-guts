@@ -27,6 +27,18 @@ export type Meal = {
 	updated: Scalars['Date'];
 };
 
+export type MealEdge = {
+	__typename?: 'MealEdge';
+	cursor?: Maybe<Scalars['String']>;
+	node?: Maybe<Meal>;
+};
+
+export type MealEdges = {
+	__typename?: 'MealEdges';
+	edges?: Maybe<Array<Maybe<MealEdge>>>;
+	pageInfo: PageInfo;
+};
+
 export type Mutation = {
 	__typename?: 'Mutation';
 	authenticate?: Maybe<Scalars['Boolean']>;
@@ -54,11 +66,19 @@ export type MutationUpdateAccountArgs = {
 	token: Scalars['String'];
 };
 
+export type PageInfo = {
+	__typename?: 'PageInfo';
+	endCursor?: Maybe<Scalars['String']>;
+	hasNextPage?: Maybe<Scalars['Boolean']>;
+	hasPreviousPage?: Maybe<Scalars['Boolean']>;
+	startCursor?: Maybe<Scalars['String']>;
+};
+
 export type Query = {
 	__typename?: 'Query';
 	loggedInUser?: Maybe<User>;
 	meal?: Maybe<Meal>;
-	meals?: Maybe<Array<Maybe<Meal>>>;
+	meals?: Maybe<MealEdges>;
 	user: User;
 	users: Array<User>;
 };
@@ -68,6 +88,8 @@ export type QueryMealArgs = {
 };
 
 export type QueryMealsArgs = {
+	after?: InputMaybe<Scalars['String']>;
+	first?: InputMaybe<Scalars['Int']>;
 	ownerId: Scalars['ID'];
 };
 
@@ -173,8 +195,12 @@ export type ResolversTypes = {
 	Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 	Date: ResolverTypeWrapper<Scalars['Date']>;
 	ID: ResolverTypeWrapper<Scalars['ID']>;
+	Int: ResolverTypeWrapper<Scalars['Int']>;
 	Meal: ResolverTypeWrapper<Meal>;
+	MealEdge: ResolverTypeWrapper<MealEdge>;
+	MealEdges: ResolverTypeWrapper<MealEdges>;
 	Mutation: ResolverTypeWrapper<{}>;
+	PageInfo: ResolverTypeWrapper<PageInfo>;
 	Query: ResolverTypeWrapper<{}>;
 	String: ResolverTypeWrapper<Scalars['String']>;
 	User: ResolverTypeWrapper<User>;
@@ -185,8 +211,12 @@ export type ResolversParentTypes = {
 	Boolean: Scalars['Boolean'];
 	Date: Scalars['Date'];
 	ID: Scalars['ID'];
+	Int: Scalars['Int'];
 	Meal: Meal;
+	MealEdge: MealEdge;
+	MealEdges: MealEdges;
 	Mutation: {};
+	PageInfo: PageInfo;
 	Query: {};
 	String: Scalars['String'];
 	User: User;
@@ -219,6 +249,24 @@ export type MealResolvers<
 	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type MealEdgeResolvers<
+	ContextType = Context,
+	ParentType extends ResolversParentTypes['MealEdge'] = ResolversParentTypes['MealEdge']
+> = {
+	cursor?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+	node?: Resolver<Maybe<ResolversTypes['Meal']>, ParentType, ContextType>;
+	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MealEdgesResolvers<
+	ContextType = Context,
+	ParentType extends ResolversParentTypes['MealEdges'] = ResolversParentTypes['MealEdges']
+> = {
+	edges?: Resolver<Maybe<Array<Maybe<ResolversTypes['MealEdge']>>>, ParentType, ContextType>;
+	pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
+	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type MutationResolvers<
 	ContextType = Context,
 	ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']
@@ -246,6 +294,17 @@ export type MutationResolvers<
 	>;
 };
 
+export type PageInfoResolvers<
+	ContextType = Context,
+	ParentType extends ResolversParentTypes['PageInfo'] = ResolversParentTypes['PageInfo']
+> = {
+	endCursor?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+	hasNextPage?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+	hasPreviousPage?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+	startCursor?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+	__isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type QueryResolvers<
 	ContextType = Context,
 	ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']
@@ -258,7 +317,7 @@ export type QueryResolvers<
 		RequireFields<QueryMealArgs, 'id'>
 	>;
 	meals?: Resolver<
-		Maybe<Array<Maybe<ResolversTypes['Meal']>>>,
+		Maybe<ResolversTypes['MealEdges']>,
 		ParentType,
 		ContextType,
 		RequireFields<QueryMealsArgs, 'ownerId'>
@@ -288,7 +347,10 @@ export type UserResolvers<
 export type Resolvers<ContextType = Context> = {
 	Date?: GraphQLScalarType;
 	Meal?: MealResolvers<ContextType>;
+	MealEdge?: MealEdgeResolvers<ContextType>;
+	MealEdges?: MealEdgesResolvers<ContextType>;
 	Mutation?: MutationResolvers<ContextType>;
+	PageInfo?: PageInfoResolvers<ContextType>;
 	Query?: QueryResolvers<ContextType>;
 	User?: UserResolvers<ContextType>;
 };

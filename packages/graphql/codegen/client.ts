@@ -27,6 +27,18 @@ export type Meal = {
 	updated: Scalars['Date'];
 };
 
+export type MealEdge = {
+	__typename?: 'MealEdge';
+	cursor?: Maybe<Scalars['String']>;
+	node?: Maybe<Meal>;
+};
+
+export type MealEdges = {
+	__typename?: 'MealEdges';
+	edges?: Maybe<Array<Maybe<MealEdge>>>;
+	pageInfo: PageInfo;
+};
+
 export type Mutation = {
 	__typename?: 'Mutation';
 	authenticate?: Maybe<Scalars['Boolean']>;
@@ -54,11 +66,19 @@ export type MutationUpdateAccountArgs = {
 	token: Scalars['String'];
 };
 
+export type PageInfo = {
+	__typename?: 'PageInfo';
+	endCursor?: Maybe<Scalars['String']>;
+	hasNextPage?: Maybe<Scalars['Boolean']>;
+	hasPreviousPage?: Maybe<Scalars['Boolean']>;
+	startCursor?: Maybe<Scalars['String']>;
+};
+
 export type Query = {
 	__typename?: 'Query';
 	loggedInUser?: Maybe<User>;
 	meal?: Maybe<Meal>;
-	meals?: Maybe<Array<Maybe<Meal>>>;
+	meals?: Maybe<MealEdges>;
 	user: User;
 	users: Array<User>;
 };
@@ -68,6 +88,8 @@ export type QueryMealArgs = {
 };
 
 export type QueryMealsArgs = {
+	after?: InputMaybe<Scalars['String']>;
+	first?: InputMaybe<Scalars['Int']>;
 	ownerId: Scalars['ID'];
 };
 
@@ -133,19 +155,34 @@ export type LoggedInUserQuery = {
 
 export type MealsQueryVariables = Exact<{
 	ownerId: Scalars['ID'];
+	after?: InputMaybe<Scalars['String']>;
 }>;
 
 export type MealsQuery = {
 	__typename?: 'Query';
-	meals?: Array<{
-		__typename?: 'Meal';
-		id: string;
-		name: string;
-		about: string;
-		created: any;
-		updated: any;
-		ownerId: string;
-	} | null> | null;
+	meals?: {
+		__typename?: 'MealEdges';
+		edges?: Array<{
+			__typename?: 'MealEdge';
+			cursor?: string | null;
+			node?: {
+				__typename?: 'Meal';
+				id: string;
+				name: string;
+				about: string;
+				created: any;
+				updated: any;
+				ownerId: string;
+			} | null;
+		} | null> | null;
+		pageInfo: {
+			__typename?: 'PageInfo';
+			startCursor?: string | null;
+			endCursor?: string | null;
+			hasNextPage?: boolean | null;
+			hasPreviousPage?: boolean | null;
+		};
+	} | null;
 };
 
 export const AuthenticateDocument = gql`
@@ -361,14 +398,25 @@ export type LoggedInUserQueryResult = Apollo.QueryResult<
 	LoggedInUserQueryVariables
 >;
 export const MealsDocument = gql`
-	query Meals($ownerId: ID!) {
-		meals(ownerId: $ownerId) {
-			id
-			name
-			about
-			created
-			updated
-			ownerId
+	query Meals($ownerId: ID!, $after: String) {
+		meals(ownerId: $ownerId, first: 5, after: $after) {
+			edges {
+				cursor
+				node {
+					id
+					name
+					about
+					created
+					updated
+					ownerId
+				}
+			}
+			pageInfo {
+				startCursor
+				endCursor
+				hasNextPage
+				hasPreviousPage
+			}
 		}
 	}
 `;
@@ -386,6 +434,7 @@ export const MealsDocument = gql`
  * const { data, loading, error } = useMealsQuery({
  *   variables: {
  *      ownerId: // value for 'ownerId'
+ *      after: // value for 'after'
  *   },
  * });
  */

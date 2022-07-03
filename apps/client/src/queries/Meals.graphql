@@ -1,10 +1,21 @@
-query Meals($ownerId: ID!) {
-	meals(ownerId: $ownerId) {
-		id
-		name
-		about
-		created
-		updated
-		ownerId
+query Meals($ownerId: ID!, $after: String) {
+	meals(ownerId: $ownerId, first: 5, after: $after) {
+		edges {
+			cursor
+			node {
+				id
+				name
+				about
+				created
+				updated
+				ownerId
+			}
+		}
+		pageInfo {
+			startCursor
+			endCursor
+			hasNextPage
+			hasPreviousPage
+		}
 	}
 }

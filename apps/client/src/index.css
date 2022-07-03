@@ -89,6 +89,10 @@
 		@apply bg-danger;
 	}
 
+	button[disabled] {
+		@apply bg-opacity-70;
+	}
+
 	input {
 		@apply max-w-xs;
 	}

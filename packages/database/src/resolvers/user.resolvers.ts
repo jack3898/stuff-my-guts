@@ -6,7 +6,7 @@ import { createUserValidation, updateUserValidation } from '@smg/validation/src/
 
 export const userResolvers: Resolvers = {
 	Query: {
-		loggedInUser: async (root, input, { client, req, user }) => {
+		loggedInUser: async (root, input, { client, user }) => {
 			const userId = decodeJwt<{ id: string }>(user.token || '').id;
 			const currentUser = await client.user.findFirst({ where: { id: userId } });
 
@@ -22,7 +22,7 @@ export const userResolvers: Resolvers = {
 			const user = await client.user.findFirst({ where: { email: input.email } });
 			const validPassword = await verifyHash(input.password, user?.password);
 
-			if (user.id && validPassword) {
+			if (user?.id && validPassword) {
 				const token = signJwt({ id: user.id });
 
 				res.cookie('auth-token', token, { sameSite: 'none', secure: true });

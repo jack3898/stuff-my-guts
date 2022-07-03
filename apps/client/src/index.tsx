@@ -1,11 +1,12 @@
 import Header from '@smg/components/src/core-page/Header';
 import { Protect } from '@smg/components/src/core-page/Protect';
 import { AuthContextProvider } from '@smg/components/src/hooks/useAuth';
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@smg/graphql/apollo/client';
+import { ApolloClient, ApolloProvider } from '@smg/graphql/apollo/client';
 import { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './index.css';
+import inMemoryCache from './inMemoryCache.config';
 
 const Home = lazy(() => import('./pages/home/Home'));
 const Login = lazy(() => import('./pages/login/Login'));
@@ -14,7 +15,7 @@ const Account = lazy(() => import('./pages/account/Account'));
 
 const client = new ApolloClient({
 	uri: 'http://localhost:3001/graphql',
-	cache: new InMemoryCache(),
+	cache: inMemoryCache,
 	credentials: 'include'
 });
 

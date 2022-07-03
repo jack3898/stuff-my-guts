@@ -4,7 +4,7 @@
 	"description": "The main frontend client.",
 	"main": "src/index.ts",
 	"scripts": {
-		"dev": "ts-node app.serve.ts",
+		"dev": "ts-node app.serve.ts --config nodemon.json",
 		"build": "ts-node app.build.ts",
 		"test": "jest --passWithNoTests",
 		"pre-commit": "ts-node pre-commit.ts"

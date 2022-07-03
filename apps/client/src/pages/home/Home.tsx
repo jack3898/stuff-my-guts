@@ -7,11 +7,13 @@ import { useEffect } from 'react';
 export default function Home() {
 	const loggedInUserQuery = useLoggedInUserQuery();
 	const loggedInUser = loggedInUserQuery.data?.loggedInUser;
-	const [getMeals, { data }] = useMealsLazyQuery();
+	const [getMeals, { data, fetchMore }] = useMealsLazyQuery();
 
 	useEffect(() => {
 		if (loggedInUser?.id) getMeals({ variables: { ownerId: loggedInUser.id } });
 	}, [loggedInUser?.id]);
+
+	const { pageInfo, edges } = data?.meals || {};
 
 	return (
 		<Main>
@@ -23,16 +25,29 @@ export default function Home() {
 					<h2>Your meals 🍝</h2>
 					<p>Below are your meals!</p>
 					<ul className="grid gap-4">
-						{data?.meals?.map((meal) => {
+						{edges?.map((edge) => {
 							return (
 								<li className="border rounded p-4">
-									<h3>{meal?.name}</h3>
-									<p>{meal?.about}</p>
-									<small>{formatDate(new Date(meal?.created))}</small>
+									<h3>{edge?.node?.name}</h3>
+									<p>{edge?.node?.about}</p>
+									<small>{formatDate(new Date(edge?.node?.created))}</small>
 								</li>
 							);
 						})}
 					</ul>
+				</section>
+				<section>
+					<button
+						className="btn-primary"
+						disabled={!pageInfo?.hasNextPage}
+						onClick={() => {
+							if (pageInfo?.hasNextPage) {
+								fetchMore({ variables: { after: pageInfo?.endCursor } });
+							}
+						}}
+					>
+						Load more!
+					</button>
 				</section>
 			</Rows>
 		</Main>
