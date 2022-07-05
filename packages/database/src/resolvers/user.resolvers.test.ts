@@ -32,6 +32,28 @@ describe('user resolver', () => {
 		jest.clearAllMocks();
 	});
 
+	it('should log in the current authenticated user', () => {
+		// @ts-ignore
+		const result = userResolvers.Query?.loggedInUser(
+			null,
+			{},
+			{ client, user: { token: process.env.TEST_JWT } }
+		);
+
+		expect(result).resolves.toStrictEqual(testData());
+	});
+
+	it('loggedInUser query should resolve null when not logged in', () => {
+		// @ts-ignore
+		const result = userResolvers.Query?.loggedInUser(
+			null,
+			{},
+			{ client, user: { token: undefined } }
+		);
+
+		expect(result).rejects.toThrowError();
+	});
+
 	it('should authenticate a user', async () => {
 		// @ts-ignore
 		const result = await userResolvers.Mutation.authenticate(
