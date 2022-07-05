@@ -1,8 +1,7 @@
-import { customDirectives, resolvers, typeDefs } from '@smg/database';
+import { customDirectives, paginateFindMany, resolvers, typeDefs } from '@smg/database';
 import prismaClient from '@smg/database/src/prismaClient';
 import { ApolloServer } from '@smg/graphql/apollo/server';
 import { ApolloServerPluginLandingPageLocalDefault } from '@smg/graphql/apollo/server-core';
-import { paginateFindMany } from '@smg/graphql/findManyCursorConnection';
 import { makeExecutableSchema } from '@smg/graphql/gql-tools/schema';
 import { stitchSchemas } from '@smg/graphql/gql-tools/stitch';
 import { stitchingDirectives } from '@smg/graphql/gql-tools/stitching-directives';
@@ -39,7 +38,7 @@ const server = new ApolloServer({
 			return {
 				user: { token },
 				client: prismaClient,
-				paginateFindMany: paginateFindMany,
+				paginateFindMany,
 				req,
 				res
 			} as Context;

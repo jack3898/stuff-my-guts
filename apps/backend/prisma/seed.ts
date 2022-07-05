@@ -1,7 +1,7 @@
-import { prismaSeederClient, seedable } from '@smg/database';
+import { prismaClient, seedData } from '@smg/database';
 
 Promise.all(
-	seedable.map(async (seed) => {
+	seedData.map(async (seed) => {
 		while (true) {
 			// Sometimes foreign key constraints may cause the seed to fail first time.
 			try {
@@ -24,13 +24,13 @@ Promise.all(
 )
 	.then(() => {
 		console.log('✅ Database has been seeded!');
-		prismaSeederClient.$disconnect();
+		prismaClient.$disconnect();
 		process.exit(0);
 	})
 	.catch((error) => {
 		const message = ['❌ Database seeding failed!', '⬇️ ⬇️ ⬇️', error, '⬆️ ⬆️ ⬆️'];
 
 		console.error(message.join('\n\n'));
-		prismaSeederClient.$disconnect();
+		prismaClient.$disconnect();
 		process.exit(1);
 	});

@@ -1,7 +1,8 @@
 import { PrismaClient } from '@prisma/client';
+import { paginateFindMany } from '@smg/database';
 import { ExpressContext } from 'apollo-server-express';
-import { paginateFindMany } from './findManyCursorConnection';
 
+// You can find the usage of this type in the backend client
 export type Context = {
 	user: {
 		token?: string;

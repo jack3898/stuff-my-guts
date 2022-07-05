@@ -5,7 +5,7 @@ import {
 
 type TQuery<TFunc> = TFunc extends (A: infer A) => any ? A : any;
 
-export function paginateFindMany<TFindMany extends { findMany: any; count: any }>(
+export default function paginateFindMany<TFindMany extends { findMany: any; count: any }>(
 	model: TFindMany,
 	query: TQuery<TFindMany['findMany']>,
 	paginateOptions: ConnectionArguments

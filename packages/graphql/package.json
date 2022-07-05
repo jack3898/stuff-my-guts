@@ -18,7 +18,6 @@
 	"homepage": "https://github.com/jack3898/meal-ideas#readme",
 	"dependencies": {
 		"@apollo/client": "^3.6.9",
-		"@devoxa/prisma-relay-cursor-connection": "^2.2.2",
 		"@graphql-tools/schema": "^8.5.0",
 		"@graphql-tools/stitch": "^8.7.0",
 		"@graphql-tools/stitching-directives": "^2.3.0",
@@ -39,5 +38,8 @@
 		"@graphql-codegen/typescript-resolvers": "^2.6.6",
 		"@smg/config-tsconfig": "*",
 		"@smg/depcheck": "*"
+	},
+	"peerDependencies": {
+		"@smg/database": "*"
 	}
 }

@@ -1,13 +1,11 @@
-import * as directives from './gql-directives';
-import prismaClient from './prismaClient';
-import importedResolvers from './resolvers';
-import seedData from './seed-data';
-import importedTypeDefs from './typedefs';
+import resolvers from './resolvers';
+import typeDefs from './typedefs';
 
-export const resolvers = importedResolvers;
-export const typeDefs = importedTypeDefs;
-export const seedable = seedData;
-export const prismaSeederClient = prismaClient;
-export const customDirectives = directives;
+export * as customDirectives from './gql-directives';
+export { default as paginateFindMany } from './paginateFindMany';
+export { default as prismaClient } from './prismaClient';
+export { default as resolvers } from './resolvers';
+export { default as seedData } from './seed-data';
+export { default as typeDefs } from './typedefs';
 
 export default [...typeDefs, ...resolvers];
